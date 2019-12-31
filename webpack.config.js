@@ -1,10 +1,19 @@
+const internalIp = require("internal-ip");
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const PORT = 4000;
+
+if (process.env.NODE_ENV === "development") {
+  console.log(
+    `\n\nWhen done building, your application will be available at http://${internalIp.v4.sync()}:${PORT}\n\n\n`
+  );
+}
+
 module.exports = {
   context: __dirname,
-  mode: "development",
+  mode: process.env.NODE_ENV,
   entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
@@ -59,7 +68,7 @@ module.exports = {
     contentBase: "./dist",
     watchContentBase: true,
     compress: true,
-    port: 4000,
+    port: PORT,
     hot: true,
     inline: true,
     open: true,

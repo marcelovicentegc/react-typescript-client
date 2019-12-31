@@ -40,4 +40,10 @@ export const AppTitle = styled.span`
       content: "🍰 rtc";
     }
   }
+
+  @media only screen and (max-width: 450px) {
+    &::after {
+      content: "🍰";
+    }
+  }
 `;

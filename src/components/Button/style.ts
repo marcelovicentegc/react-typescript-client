@@ -13,7 +13,7 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const StyledButton = styled.button<{ type?: ButtonType }>`
+export const StyledButton = styled.button<{ buttonType: ButtonType }>`
   position: relative;
   border-color: transparent;
   outline: none;
@@ -23,17 +23,17 @@ export const StyledButton = styled.button<{ type?: ButtonType }>`
   border-top-right-radius: 16px;
   border-width: 0 0 4px;
   padding: 13px 16px;
-  ${({ theme, type }) =>
+  ${({ theme, buttonType }) =>
     `background-color: ${
-      !type || type === ButtonType.primary
+      buttonType === ButtonType.primary
         ? theme.color.green1
-        : type === ButtonType.secondary
+        : buttonType === ButtonType.secondary
         ? theme.color.white1
         : theme.color.blue3
     }`}
-  ${({ theme, type }) =>
+  ${({ theme, buttonType }) =>
     `color: ${
-      !type || type === ButtonType.primary || type === ButtonType.tertiary
+      buttonType === ButtonType.primary || buttonType === ButtonType.tertiary
         ? theme.color.white1
         : theme.color.blue1
     }`}
@@ -45,11 +45,11 @@ export const StyledButton = styled.button<{ type?: ButtonType }>`
 
   &:after {
     position: absolute;
-    ${({ theme, type }) =>
+    ${({ theme, buttonType }) =>
       `background-color: ${
-        !type || type === ButtonType.primary
+        buttonType === ButtonType.primary
           ? theme.color.green2
-          : type === ButtonType.secondary
+          : buttonType === ButtonType.secondary
           ? theme.color.white2
           : theme.color.blue2
       };`}

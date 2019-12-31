@@ -1,12 +1,23 @@
 import React from "react";
-import { LayoutWrapper, StyledLayout } from "./style";
+import {
+  LayoutWrapper,
+  StyledLayout,
+  Image,
+  Span,
+  GreetingsBox
+} from "./style";
 import rocketLaunch from "../../icons/rocketLaunch.png";
 
 export const Layout: React.SFC = () => {
   return (
     <LayoutWrapper>
       <StyledLayout>
-        <img src={rocketLaunch} />
+        <GreetingsBox>
+          <Span>The install worked successfully! Congratulations! </Span>
+          <br />
+          <Span>Now go build something great 😃!</Span>
+        </GreetingsBox>
+        <Image src={rocketLaunch} />
       </StyledLayout>
     </LayoutWrapper>
   );

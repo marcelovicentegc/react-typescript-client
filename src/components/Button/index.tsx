@@ -7,15 +7,16 @@ export enum ButtonType {
   tertiary
 }
 
-interface Props extends Omit<React.HTMLProps<HTMLButtonElement>, "type"> {
+interface Props
+  extends Omit<React.HTMLProps<HTMLButtonElement>, "type" | "as" | "ref"> {
   label: string;
   type?: ButtonType;
 }
 
-export const Button: React.FC<Props> = ({ label, type }, props) => {
+export const Button: React.FC<Props> = ({ label, type, ...props }) => {
   return (
     <ButtonWrapper>
-      <StyledButton {...props} type={type}>
+      <StyledButton {...props} buttonType={type ? type : ButtonType.primary}>
         <Label>{label}</Label>
       </StyledButton>
     </ButtonWrapper>

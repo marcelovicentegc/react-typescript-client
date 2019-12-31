@@ -10,7 +10,8 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 
     html {
       width: 100vw;
-      height: 100vh;
+      height: 100vh;    
+      overflow-x: hidden;
       
       body {
             ${props => props.theme.fontFamily}

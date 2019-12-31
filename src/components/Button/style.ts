@@ -2,6 +2,11 @@ import { styled } from "../../utils/theme";
 
 export const ButtonWrapper = styled.div`
   max-width: 200px;
+  transition: 0.2s;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
 `;
 
 export const StyledButton = styled.button`
@@ -14,7 +19,7 @@ export const StyledButton = styled.button`
   border-top-right-radius: 16px;
   border-width: 0 0 4px;
   padding: 13px 16px;
-  background-color: #78c800;
+  background-color: ${({ theme }) => theme.color.green1};
   color: #fff;
   cursor: pointer;
 
@@ -24,7 +29,7 @@ export const StyledButton = styled.button`
 
   &:after {
     position: absolute;
-    background-color: #58a700;
+    background-color: ${({ theme }) => theme.color.green2};
     border-color: transparent;
     border-width: 0 0 4px;
     border-radius: 16px;
@@ -39,5 +44,7 @@ export const StyledButton = styled.button`
 
 export const Label = styled.span`
   position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
   top: 1px;
 `;

@@ -1,0 +1,19 @@
+image: node:12
+
+stages:
+  - check
+  - build
+  - test
+
+NPM Audit:
+  stage: check
+  allow_failure: true
+  script:
+    - npm audit
+
+Build:
+  stage: build
+  before_script:
+    - npm ci
+  script:
+    - npm build

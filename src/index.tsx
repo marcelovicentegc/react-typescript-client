@@ -2,7 +2,8 @@ import * as React from "react";
 import { render } from "react-dom";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme, Theme } from "./utils/theme";
-import { Button, ButtonType } from "./components/Button";
+import { Header } from "./components/Header";
+import { Layout } from "./components/Layout";
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     ${props => props.theme.importFontFamily}
@@ -27,9 +28,8 @@ const Root: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle theme={theme} />
-      <Button label={"Oh yes!"} type={ButtonType.secondary} />
-      <Button label={"Let's get started!"} />
-      <Button label={"Hurray!"} type={ButtonType.tertiary} />
+      <Header />
+      <Layout />
     </ThemeProvider>
   );
 };

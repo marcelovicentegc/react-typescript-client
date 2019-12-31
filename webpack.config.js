@@ -48,7 +48,7 @@ module.exports = {
         test: /\.(png|jp(e*)g|gif|svg)$/,
         loader: "file-loader",
         options: {
-          name: "[name].[ext]",
+          name: "icons/[name].[ext]",
           outputPath: "assets"
         }
       }

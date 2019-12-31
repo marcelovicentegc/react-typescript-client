@@ -2,8 +2,11 @@ import { styled } from "../../utils/theme";
 import { ButtonType } from ".";
 
 export const ButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
   max-width: 200px;
   transition: 0.2s;
+  margin: 0px 8px;
 
   &:hover {
     filter: brightness(1.1);

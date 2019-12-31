@@ -1,14 +1,21 @@
 import React from "react";
 import { ButtonWrapper, StyledButton, Label } from "./style";
 
-interface Props {
-  label: string;
+export enum ButtonType {
+  primary,
+  secondary,
+  tertiary
 }
 
-export const Button: React.FC<Props> = ({ label }) => {
+interface Props extends Omit<React.HTMLProps<HTMLButtonElement>, "type"> {
+  label: string;
+  type?: ButtonType;
+}
+
+export const Button: React.FC<Props> = ({ label, type }, props) => {
   return (
     <ButtonWrapper>
-      <StyledButton>
+      <StyledButton {...props} type={type}>
         <Label>{label}</Label>
       </StyledButton>
     </ButtonWrapper>

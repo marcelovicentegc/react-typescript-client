@@ -1,4 +1,5 @@
 import { styled } from "../../utils/theme";
+import { ButtonType } from ".";
 
 export const ButtonWrapper = styled.div`
   max-width: 200px;
@@ -9,7 +10,7 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{ type?: ButtonType }>`
   position: relative;
   border-color: transparent;
   outline: none;
@@ -19,8 +20,20 @@ export const StyledButton = styled.button`
   border-top-right-radius: 16px;
   border-width: 0 0 4px;
   padding: 13px 16px;
-  background-color: ${({ theme }) => theme.color.green1};
-  color: #fff;
+  ${({ theme, type }) =>
+    `background-color: ${
+      !type || type === ButtonType.primary
+        ? theme.color.green1
+        : type === ButtonType.secondary
+        ? theme.color.white1
+        : theme.color.blue3
+    }`}
+  ${({ theme, type }) =>
+    `color: ${
+      !type || type === ButtonType.primary || type === ButtonType.tertiary
+        ? theme.color.white1
+        : theme.color.blue1
+    }`}
   cursor: pointer;
 
   &:focus {
@@ -29,7 +42,14 @@ export const StyledButton = styled.button`
 
   &:after {
     position: absolute;
-    background-color: ${({ theme }) => theme.color.green2};
+    ${({ theme, type }) =>
+      `background-color: ${
+        !type || type === ButtonType.primary
+          ? theme.color.green2
+          : type === ButtonType.secondary
+          ? theme.color.white2
+          : theme.color.blue2
+      };`}
     border-color: transparent;
     border-width: 0 0 4px;
     border-radius: 16px;

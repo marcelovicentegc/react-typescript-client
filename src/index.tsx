@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
 import { LandingPageProvider } from "./contexts/LandingPageContext";
 import { register } from "./serviceWorker";
+import { LandingPage } from "./containers/LandingPage";
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     html {
@@ -31,7 +32,9 @@ const Root: React.FC = () => {
       <LandingPageProvider>
         <GlobalStyle theme={theme} />
         <Header />
-        <Layout />
+        <Layout>
+          <LandingPage />
+        </Layout>
       </LandingPageProvider>
     </ThemeProvider>
   );

@@ -1,14 +1,18 @@
 import React from "react";
-import { CardWrapper, StyledCard } from "./style";
+import { CardWrapper, StyledCard, Title } from "./style";
 
 interface Props {
   children?: React.ReactNode;
+  title?: string;
 }
 
-export const Card: React.SFC<Props> = ({ children }) => {
+export const Card: React.SFC<Props> = ({ children, title }) => {
   return (
     <CardWrapper>
-      <StyledCard>{children}</StyledCard>
+      <StyledCard>
+        {title && <Title>{title}</Title>}
+        {children}
+      </StyledCard>
     </CardWrapper>
   );
 };

@@ -25,7 +25,6 @@ export const Header: React.FC = () => {
               state.modal !== null ? hideTipsModal() : displayTipsModal()
             }
           />
-          {console.log(state.modal)}
           <Button label={"Documentation"} type={ButtonType.tertiary} />
           <Button
             label={"Github"}

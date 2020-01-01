@@ -4,10 +4,10 @@ export const CardWrapper = styled.div``;
 
 export const StyledCard = styled.div`
   display: flex;
+  flex-direction: column;
   ${({ theme }) => `background: ${theme.color.white1};
   border: 2px solid ${theme.color.grey1};`};
   border-radius: 16px;
-  display: block;
   margin: 0 24px 24px;
   padding: 24px;
 `;

@@ -25,16 +25,7 @@ export const Layout: React.FC = () => {
           {state.modal === ModalState.tips && (
             <CardWrapper onClick={() => hideTipsModal()}>
               <Card title={"🚀 Tips for a better web app"}>
-                <List
-                  items={[
-                    { label: "Plan your application" },
-                    { label: "Don't repeat yourself" },
-                    { label: "Keep it simple, stupid" },
-                    { label: "Control change" },
-                    { label: "Document what you're doing" },
-                    { label: "Test what you're writing" }
-                  ]}
-                />
+                <List items={state.tips} />
               </Card>
             </CardWrapper>
           )}

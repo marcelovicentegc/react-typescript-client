@@ -8,13 +8,21 @@ enum ModalState {
   tips
 }
 
+interface Tip {
+  key: string;
+  label: string;
+}
+
 interface LandingPageState {
-  modal: ModalState | null;
+  modal?: ModalState | null;
+  tips?: Tip[];
 }
 
 enum LandingPageActionType {
   displayTipsModal,
-  hideTipsModal
+  hideTipsModal,
+  addTip,
+  removeTip
 }
 
 interface LandingPageAction {
@@ -23,7 +31,7 @@ interface LandingPageAction {
 
 interface LandingPageContextInterface {
   state: LandingPageState;
-  dispatch(action: LandingPageAction): void;
+  dispatch(action: LandingPageAction, args?: Tip): void;
 }
 
 const LandingPageContext = React.createContext<LandingPageContextInterface | null>(
@@ -32,7 +40,8 @@ const LandingPageContext = React.createContext<LandingPageContextInterface | nul
 
 const landingPageReducer = (
   state: LandingPageState,
-  action: LandingPageAction
+  action: LandingPageAction,
+  args?: Tip
 ): LandingPageState => {
   switch (action.type) {
     case LandingPageActionType.displayTipsModal: {
@@ -40,6 +49,23 @@ const landingPageReducer = (
     }
     case LandingPageActionType.hideTipsModal: {
       return { modal: null };
+    }
+    case LandingPageActionType.addTip: {
+      if (args) {
+        return { tips: [...state.tips, args] };
+      } else {
+        return { tips: [...state.tips] };
+      }
+    }
+    case LandingPageActionType.removeTip: {
+      if (args) {
+        const tips = state.tips;
+        const tipIndex = tips.findIndex(tip => tip.key === args.key);
+        tips.splice(tipIndex, 1);
+        return {
+          tips
+        };
+      }
     }
     default: {
       throw new Error(`Unsupported action type: ${action.type}`);
@@ -60,18 +86,34 @@ const useLandingPageContext = () => {
     dispatch({ type: LandingPageActionType.displayTipsModal });
   const hideTipsModal = () =>
     dispatch({ type: LandingPageActionType.hideTipsModal });
+  const addTip = (tip: Tip) => {
+    dispatch({ type: LandingPageActionType.addTip }, tip);
+  };
+  const removeTip = (tip: Tip) => {
+    dispatch({ type: LandingPageActionType.removeTip }, tip);
+  };
 
   return {
     state,
     dispatch,
     displayTipsModal,
-    hideTipsModal
+    hideTipsModal,
+    addTip,
+    removeTip
   };
 };
 
 const LandingPageProvider: React.FC<LandingPageProviderProps> = props => {
   const [state, dispatch] = React.useReducer(landingPageReducer, {
-    modal: null
+    modal: null,
+    tips: [
+      { label: "Plan your application", key: "1" },
+      { label: "Don't repeat yourself", key: "2" },
+      { label: "Keep it simple, stupid", key: "3" },
+      { label: "Control change", key: "4" },
+      { label: "Document what you're doing", key: "5" },
+      { label: "Test what you're writing", key: "6" }
+    ]
   });
   const [memoizedState, memoizedDispatch] = React.useMemo(
     () => [state, dispatch],

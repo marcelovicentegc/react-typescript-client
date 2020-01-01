@@ -13,6 +13,7 @@ import { ButtonGroup } from "./ButtonGroup";
 export const LandingPage: React.FC = () => {
   const [tipLabel, setTipLabel] = React.useState("");
   const [tipKey, setTipKey] = React.useState("");
+  const [currentTipLabel, setCurrentTipLabel] = React.useState("");
   const {
     state,
     hideTipsModal,
@@ -44,6 +45,7 @@ export const LandingPage: React.FC = () => {
                 displayItemEditionModal={displayTipEditionModal}
                 removeItem={removeTip}
                 setTipKey={setTipKey}
+                getCurrentTipLabel={setCurrentTipLabel}
               />
             </Card>
           )}
@@ -56,6 +58,7 @@ export const LandingPage: React.FC = () => {
                     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                       setTipLabel(e.target.value);
                     },
+                    placeholder: currentTipLabel,
                     value: tipLabel
                   }
                 ]}
@@ -77,6 +80,7 @@ export const LandingPage: React.FC = () => {
                     onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                       setTipLabel(e.target.value);
                     },
+                    placeholder: currentTipLabel,
                     value: tipLabel
                   }
                 ]}

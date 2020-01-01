@@ -6,10 +6,10 @@ import { generateKey } from "../../../utils/generateKey";
 
 interface Props {
   tipLabel: string;
+  tipKey?: string;
   displayTipsModal: () => void;
   setTipLabel: (tipLabel: string) => void;
   tipFunction: (tip: Tip) => void;
-  tipKey?: string;
 }
 
 export const ButtonGroup: React.SFC<Props> = ({

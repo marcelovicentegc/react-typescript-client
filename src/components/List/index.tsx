@@ -13,13 +13,15 @@ interface Props {
   setTipKey?: (key: string) => void;
   displayItemEditionModal?: () => void;
   removeItem?: (args: Item) => void;
+  getCurrentTipLabel?: (tipLabel: string) => void;
 }
 
 export const List: React.FC<Props> = ({
   items,
   displayItemEditionModal,
   removeItem,
-  setTipKey
+  setTipKey,
+  getCurrentTipLabel
 }) => {
   return (
     <UnorderedList>
@@ -32,10 +34,11 @@ export const List: React.FC<Props> = ({
           >
             {item.label}
             <Container>
-              {displayItemEditionModal && setTipKey && (
+              {displayItemEditionModal && setTipKey && getCurrentTipLabel && (
                 <span
                   onClick={() => {
                     setTipKey(item.key);
+                    getCurrentTipLabel(item.label);
                     displayItemEditionModal();
                   }}
                 >

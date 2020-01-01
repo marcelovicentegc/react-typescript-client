@@ -11,7 +11,7 @@ export const ListItem = styled.li<{ withExtraFunctionalities: boolean }>`
   align-items: center;
   justify-content: ${({ withExtraFunctionalities }) =>
     withExtraFunctionalities ? "space-between" : "center"};
-  border-top: 2px solid #e5e5e5;
+  border-top: 2px solid ${({ theme }) => theme.color.grey1};
   line-height: 1.6;
   padding: 18px 22px;
   cursor: default;

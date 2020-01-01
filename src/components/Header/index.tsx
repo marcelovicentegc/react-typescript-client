@@ -7,8 +7,11 @@ import {
   AppTitle
 } from "./style";
 import { Button, ButtonType } from "../Button";
+import { useLandingPageContext } from "../../contexts/LandingPageContext";
 
 export const Header: React.FC = () => {
+  const { state, displayTipsModal, hideTipsModal } = useLandingPageContext();
+
   return (
     <HeaderWrapper>
       <StyledHeader>
@@ -16,7 +19,13 @@ export const Header: React.FC = () => {
           <AppTitle />
         </LeftSide>
         <RightSide>
-          <Button label={"Tips"} />
+          <Button
+            label={"Tips"}
+            onClick={() =>
+              state.modal !== null ? hideTipsModal() : displayTipsModal()
+            }
+          />
+          {console.log(state.modal)}
           <Button label={"Documentation"} type={ButtonType.tertiary} />
           <Button
             label={"Github"}

@@ -4,6 +4,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme, Theme } from "./utils/theme";
 import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
+import { LandingPageProvider } from "./contexts/LandingPageContext";
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     ${props => props.theme.importFontFamily}
@@ -28,9 +29,11 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 const Root: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle theme={theme} />
-      <Header />
-      <Layout />
+      <LandingPageProvider>
+        <GlobalStyle theme={theme} />
+        <Header />
+        <Layout />
+      </LandingPageProvider>
     </ThemeProvider>
   );
 };

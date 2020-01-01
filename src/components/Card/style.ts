@@ -12,11 +12,12 @@ export const StyledCard = styled.div`
   padding: 24px;
 `;
 
-export const Title = styled.span`
+export const Title = styled.span<{ hoverable: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0px 0px 22px 0px;
   font-weight: bold;
   text-transform: uppercase;
+  ${({ hoverable }) => (hoverable ? "cursor: pointer" : "cursor: default")}
 `;

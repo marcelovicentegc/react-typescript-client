@@ -2,6 +2,20 @@
 
 [![Node CI](https://github.com/marcelovicentegc/react-typescript-client/workflows/Node%20CI/badge.svg)](https://github.com/marcelovicentegc/react-typescript-client/workflows/Node%20CI/badge.svg)
 
+## Features
+
+- UI library:
+
+  1. **React**
+
+- State management solution:
+
+  1. **React's Context API**
+
+- Styling system:
+
+  1. **Styed Components**
+
 ## Directions
 
 1. Clone this repo: `git clone https://github.com/marcelovicentegc/react-typescript-client.git`

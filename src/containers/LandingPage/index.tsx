@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Image,
-  Span,
-  GreetingsBox,
-  CardWrapper,
-  ButtonContainer
-} from "./style";
+import { Image, Span, GreetingsBox, CardWrapper } from "./style";
 import rocketLaunch from "../../icons/rocketLaunch.png";
 import {
   useLandingPageContext,
@@ -13,19 +7,21 @@ import {
 } from "../../contexts/LandingPageContext";
 import { Card } from "../../components/Card";
 import { List } from "../../components/List";
-import { Button, ButtonType } from "../../components/Button";
 import { Form } from "../../components/Form";
-import { generateKey } from "../../utils/generateKey";
+import { ButtonGroup } from "./ButtonGroup";
 
 export const LandingPage: React.FC = () => {
   const [tipLabel, setTipLabel] = React.useState("");
+  const [tipKey, setTipKey] = React.useState("");
   const {
     state,
     hideTipsModal,
     addTip,
     displayTipAdditionModal,
+    displayTipEditionModal,
     displayTipsModal,
-    removeTip
+    removeTip,
+    editTip
   } = useLandingPageContext();
 
   return (
@@ -39,11 +35,15 @@ export const LandingPage: React.FC = () => {
           }}
         >
           {state.modal === ModalState.tips && (
-            <Card title={"🚀 Tips for a better web app"}>
+            <Card
+              title={"🚀 Tips for a better web app (add a tip)"}
+              titleWithFunction={displayTipAdditionModal}
+            >
               <List
                 items={state.tips}
-                displayItemAdditionModal={displayTipAdditionModal}
+                displayItemEditionModal={displayTipEditionModal}
                 removeItem={removeTip}
+                setTipKey={setTipKey}
               />
             </Card>
           )}
@@ -60,23 +60,34 @@ export const LandingPage: React.FC = () => {
                   }
                 ]}
               />
-              <ButtonContainer>
-                <Button
-                  type={ButtonType.tertiary}
-                  label={"Go back"}
-                  onClick={() => {
-                    displayTipsModal();
-                    setTipLabel("");
-                  }}
-                />
-                <Button
-                  label={"Save changes"}
-                  onClick={() => {
-                    addTip({ label: tipLabel, key: generateKey(10) });
-                    setTipLabel("");
-                  }}
-                />
-              </ButtonContainer>
+              <ButtonGroup
+                displayTipsModal={displayTipsModal}
+                setTipLabel={setTipLabel}
+                tipLabel={tipLabel}
+                tipFunction={addTip}
+              />
+            </Card>
+          )}
+          {state.modal === ModalState.tipEdition && (
+            <Card title={"♻️ Edit a tip"}>
+              <Form
+                inputs={[
+                  {
+                    type: "text",
+                    onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                      setTipLabel(e.target.value);
+                    },
+                    value: tipLabel
+                  }
+                ]}
+              />
+              <ButtonGroup
+                displayTipsModal={displayTipsModal}
+                setTipLabel={setTipLabel}
+                tipLabel={tipLabel}
+                tipFunction={editTip}
+                tipKey={tipKey}
+              />
             </Card>
           )}
         </CardWrapper>

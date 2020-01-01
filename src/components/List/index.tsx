@@ -10,14 +10,16 @@ export interface Item
 
 interface Props {
   items: Item[];
-  displayItemAdditionModal?: () => void;
+  setTipKey?: (key: string) => void;
+  displayItemEditionModal?: () => void;
   removeItem?: (args: Item) => void;
 }
 
 export const List: React.FC<Props> = ({
   items,
-  displayItemAdditionModal,
-  removeItem
+  displayItemEditionModal,
+  removeItem,
+  setTipKey
 }) => {
   return (
     <UnorderedList>
@@ -26,14 +28,19 @@ export const List: React.FC<Props> = ({
           <ListItem
             {...item}
             key={generateKey(20)}
-            withExtraFunctionalities={
-              !!displayItemAdditionModal || !!removeItem
-            }
+            withExtraFunctionalities={!!displayItemEditionModal || !!removeItem}
           >
             {item.label}
             <Container>
-              {displayItemAdditionModal && (
-                <span onClick={displayItemAdditionModal}>➕</span>
+              {displayItemEditionModal && setTipKey && (
+                <span
+                  onClick={() => {
+                    setTipKey(item.key);
+                    displayItemEditionModal();
+                  }}
+                >
+                  ♻️
+                </span>
               )}
               {removeItem && <span onClick={() => removeItem(item)}>➖</span>}
             </Container>

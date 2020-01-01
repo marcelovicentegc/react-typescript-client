@@ -6,7 +6,8 @@ interface LandingPageProviderProps {
 
 enum ModalState {
   tips = "tips",
-  tipAddition = "tipAddition"
+  tipAddition = "tipAddition",
+  tipEdition = "tipEdition"
 }
 
 interface Tip {
@@ -23,8 +24,10 @@ enum LandingPageActionType {
   displayTipsModal,
   hideTipsModal,
   displayTipAdditionModal,
+  displayTipEditionModal,
   addTip,
-  removeTip
+  removeTip,
+  editTip
 }
 
 interface LandingPageAction {
@@ -52,11 +55,22 @@ const landingPageReducer = (
     case LandingPageActionType.hideTipsModal: {
       return { modal: null, tips: state.tips };
     }
+    case LandingPageActionType.displayTipEditionModal: {
+      return { modal: ModalState.tipEdition, tips: state.tips };
+    }
     case LandingPageActionType.displayTipAdditionModal: {
       return { modal: ModalState.tipAddition, tips: state.tips };
     }
     case LandingPageActionType.addTip: {
       return { tips: [...state.tips, action.args], modal: ModalState.tips };
+    }
+    case LandingPageActionType.editTip: {
+      const tips = state.tips;
+      const tipIndex = tips.findIndex(tip => tip.key === action.args.key);
+
+      tips[tipIndex].label = action.args.label;
+
+      return { tips, modal: ModalState.tips };
     }
     case LandingPageActionType.removeTip: {
       const tips = state.tips;
@@ -88,10 +102,16 @@ const useLandingPageContext = () => {
   const displayTipAdditionModal = () => {
     dispatch({ type: LandingPageActionType.displayTipAdditionModal });
   };
+  const displayTipEditionModal = () => {
+    dispatch({ type: LandingPageActionType.displayTipEditionModal });
+  };
   const hideTipsModal = () =>
     dispatch({ type: LandingPageActionType.hideTipsModal });
   const addTip = (tip: Tip) => {
     dispatch({ type: LandingPageActionType.addTip, args: tip });
+  };
+  const editTip = (tip: Tip) => {
+    dispatch({ type: LandingPageActionType.editTip, args: tip });
   };
   const removeTip = (tip: Tip) => {
     dispatch({ type: LandingPageActionType.removeTip, args: tip });
@@ -102,9 +122,11 @@ const useLandingPageContext = () => {
     dispatch,
     displayTipsModal,
     displayTipAdditionModal,
+    displayTipEditionModal,
     hideTipsModal,
     addTip,
-    removeTip
+    removeTip,
+    editTip
   };
 };
 

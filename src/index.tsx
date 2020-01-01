@@ -8,8 +8,6 @@ import { LandingPageProvider } from "./contexts/LandingPageContext";
 import { register } from "./serviceWorker";
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
-    ${props => props.theme.importFontFamily}
-
     html {
       width: 100vw;
       height: 100vh;    

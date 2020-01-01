@@ -1,8 +1,6 @@
 import baseStyled, { ThemedStyledInterface } from "styled-components";
 
 export const theme = {
-  importFontFamily:
-    "@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');",
   fontFamily: "font-family: 'Nunito Sans', sans-serif;",
   color: {
     white1: "#fff",

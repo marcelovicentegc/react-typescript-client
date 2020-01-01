@@ -29,6 +29,7 @@ enum LandingPageActionType {
 
 interface LandingPageAction {
   type: LandingPageActionType;
+  args?: Tip;
 }
 
 interface LandingPageContextInterface {
@@ -42,8 +43,7 @@ const LandingPageContext = React.createContext<LandingPageContextInterface | nul
 
 const landingPageReducer = (
   state: LandingPageState,
-  action: LandingPageAction,
-  args?: Tip
+  action: LandingPageAction
 ): LandingPageState => {
   switch (action.type) {
     case LandingPageActionType.displayTipsModal: {
@@ -56,17 +56,17 @@ const landingPageReducer = (
       return { modal: ModalState.tipAddition, tips: state.tips };
     }
     case LandingPageActionType.addTip: {
-      return { tips: [...state.tips, args], modal: ModalState.tips };
+      return { tips: [...state.tips, action.args], modal: ModalState.tips };
     }
     case LandingPageActionType.removeTip: {
-      if (args) {
-        const tips = state.tips;
-        const tipIndex = tips.findIndex(tip => tip.key === args.key);
-        tips.splice(tipIndex, 1);
-        return {
-          tips
-        };
-      }
+      const tips = state.tips;
+      const tipIndex = tips.findIndex(tip => tip.key === action.args.key);
+      tips.splice(tipIndex, 1);
+
+      return {
+        tips,
+        modal: ModalState.tips
+      };
     }
     default: {
       throw new Error(`Unsupported action type: ${action.type}`);
@@ -85,19 +85,23 @@ const useLandingPageContext = () => {
 
   const displayTipsModal = () =>
     dispatch({ type: LandingPageActionType.displayTipsModal });
+  const displayTipAdditionModal = () => {
+    dispatch({ type: LandingPageActionType.displayTipAdditionModal });
+  };
   const hideTipsModal = () =>
     dispatch({ type: LandingPageActionType.hideTipsModal });
   const addTip = (tip: Tip) => {
-    dispatch({ type: LandingPageActionType.addTip }, tip);
+    dispatch({ type: LandingPageActionType.addTip, args: tip });
   };
   const removeTip = (tip: Tip) => {
-    dispatch({ type: LandingPageActionType.removeTip }, tip);
+    dispatch({ type: LandingPageActionType.removeTip, args: tip });
   };
 
   return {
     state,
     dispatch,
     displayTipsModal,
+    displayTipAdditionModal,
     hideTipsModal,
     addTip,
     removeTip

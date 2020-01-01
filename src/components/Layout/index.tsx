@@ -23,7 +23,7 @@ export const Layout: React.FC = () => {
     state,
     hideTipsModal,
     addTip,
-    displayTipsModal,
+    displayTipAdditionModal,
     removeTip
   } = useLandingPageContext();
 
@@ -32,12 +32,18 @@ export const Layout: React.FC = () => {
       <StyledLayout>
         <GreetingsBox>
           {!!state.modal && (
-            <CardWrapper onClick={() => hideTipsModal()}>
+            <CardWrapper
+              onClick={e => {
+                if (e.target === e.currentTarget) {
+                  hideTipsModal();
+                }
+              }}
+            >
               {state.modal === ModalState.tips && (
                 <Card title={"🚀 Tips for a better web app"}>
                   <List
                     items={state.tips}
-                    displayItemAdditionModal={displayTipsModal}
+                    displayItemAdditionModal={displayTipAdditionModal}
                     removeItem={removeTip}
                   />
                 </Card>

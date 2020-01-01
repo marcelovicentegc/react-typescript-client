@@ -55,3 +55,8 @@ export const CardWrapper = styled.div`
   align-items: center;
   backdrop-filter: blur(5px);
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  padding-top: 22px;
+`;

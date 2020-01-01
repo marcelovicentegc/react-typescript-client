@@ -1,10 +1,12 @@
 import React from "react";
 import { InputWrapper, StyledInput } from "./style";
 
-export const Input: React.FC = () => {
+interface Props extends Omit<React.HTMLProps<HTMLInputElement>, "ref" | "as"> {}
+
+export const Input: React.FC<Props> = props => {
   return (
     <InputWrapper>
-      <StyledInput></StyledInput>
+      <StyledInput {...props}></StyledInput>
     </InputWrapper>
   );
 };

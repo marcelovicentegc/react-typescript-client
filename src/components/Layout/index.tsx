@@ -5,7 +5,8 @@ import {
   Image,
   Span,
   GreetingsBox,
-  CardWrapper
+  CardWrapper,
+  ButtonContainer
 } from "./style";
 import rocketLaunch from "../../icons/rocketLaunch.png";
 import {
@@ -17,14 +18,16 @@ import { Card } from "../Card";
 import { List } from "../List";
 import { generateKey } from "../../utils/generateKey";
 import { Form } from "../Form";
+import { Button, ButtonType } from "../Button";
 
 export const Layout: React.FC = () => {
-  const [tip, setTip] = React.useState<Tip>({ label: "", key: "" });
+  const [tipLabel, setTipLabel] = React.useState("");
   const {
     state,
     hideTipsModal,
     addTip,
     displayTipAdditionModal,
+    displayTipsModal,
     removeTip
   } = useLandingPageContext();
 
@@ -52,17 +55,29 @@ export const Layout: React.FC = () => {
               {state.modal === ModalState.tipAddition && (
                 <Card title={"➕ Add a tip"}>
                   <Form
-                    onSubmit={() =>
-                      addTip({ label: tip.label, key: generateKey(10) })
-                    }
                     inputs={[
                       {
                         type: "text",
-                        onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                          setTip({ label: e.target.value, key: "" })
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+                          setTipLabel(e.target.value);
+                        },
+                        value: tipLabel
                       }
                     ]}
                   />
+                  <ButtonContainer>
+                    <Button
+                      type={ButtonType.tertiary}
+                      label={"Go back"}
+                      onClick={() => displayTipsModal()}
+                    />
+                    <Button
+                      label={"Save changes"}
+                      onClick={() =>
+                        addTip({ label: tipLabel, key: generateKey(10) })
+                      }
+                    />
+                  </ButtonContainer>
                 </Card>
               )}
             </CardWrapper>

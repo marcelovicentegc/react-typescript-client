@@ -5,16 +5,14 @@ export const theme = {
     "@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');",
   fontFamily: "font-family: 'Nunito Sans', sans-serif;",
   color: {
-    lightShade: "#eeeee8" /* Cararra */,
-    lightAccent: "#949b92" /* Stack */,
-    mainBrand: "#876351" /* Shadow */,
-    darkShade: "#252423" /* Shark */,
-    darkAccent: "#ac7742" /* Cape Palliser */,
-    primary: "#876351" /* Shadow */,
-    info: "#232525" /* Shark */,
-    success: "#5e9850" /* Fruit Salad */,
-    warning: "#db8818" /* Zest */,
-    danger: "#f44336" /* Pomegranate */
+    white1: "#fff",
+    white2: "rgba(255, 255, 255, 0.5)",
+    blue1: "#0b3e71",
+    blue2: "#1899d6",
+    blue3: "#1cb0f6",
+    blue4: "#235390",
+    green1: "#78c800",
+    green2: "#58a700"
   }
 };
 

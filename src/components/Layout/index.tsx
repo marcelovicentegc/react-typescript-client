@@ -16,6 +16,7 @@ import {
 import { Card } from "../Card";
 import { List } from "../List";
 import { generateKey } from "../../utils/generateKey";
+import { Form } from "../Form";
 
 export const Layout: React.FC = () => {
   const [tip, setTip] = React.useState<Tip>({ label: "", key: "" });
@@ -50,16 +51,18 @@ export const Layout: React.FC = () => {
               )}
               {state.modal === ModalState.tipAddition && (
                 <Card title={"➕ Add a tip"}>
-                  <form
-                    onSubmit={() => {
-                      addTip({ label: tip.label, key: generateKey(10) });
-                    }}
-                  >
-                    <input
-                      type="text"
-                      onChange={e => setTip({ label: e.target.value, key: "" })}
-                    ></input>
-                  </form>
+                  <Form
+                    onSubmit={() =>
+                      addTip({ label: tip.label, key: generateKey(10) })
+                    }
+                    inputs={[
+                      {
+                        type: "text",
+                        onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                          setTip({ label: e.target.value, key: "" })
+                      }
+                    ]}
+                  />
                 </Card>
               )}
             </CardWrapper>

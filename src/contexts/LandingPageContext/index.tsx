@@ -5,7 +5,8 @@ interface LandingPageProviderProps {
 }
 
 enum ModalState {
-  tips
+  tips = "tips",
+  tipAddition = "tipAddition"
 }
 
 interface Tip {
@@ -21,6 +22,7 @@ interface LandingPageState {
 enum LandingPageActionType {
   displayTipsModal,
   hideTipsModal,
+  displayTipAdditionModal,
   addTip,
   removeTip
 }
@@ -45,17 +47,16 @@ const landingPageReducer = (
 ): LandingPageState => {
   switch (action.type) {
     case LandingPageActionType.displayTipsModal: {
-      return { modal: ModalState.tips };
+      return { modal: ModalState.tips, tips: state.tips };
     }
     case LandingPageActionType.hideTipsModal: {
-      return { modal: null };
+      return { modal: null, tips: state.tips };
+    }
+    case LandingPageActionType.displayTipAdditionModal: {
+      return { modal: ModalState.tipAddition, tips: state.tips };
     }
     case LandingPageActionType.addTip: {
-      if (args) {
-        return { tips: [...state.tips, args] };
-      } else {
-        return { tips: [...state.tips] };
-      }
+      return { tips: [...state.tips, args], modal: ModalState.tips };
     }
     case LandingPageActionType.removeTip: {
       if (args) {
@@ -134,5 +135,6 @@ export {
   LandingPageProvider,
   useLandingPageContext,
   ModalState,
-  LandingPageActionType
+  LandingPageActionType,
+  Tip
 };

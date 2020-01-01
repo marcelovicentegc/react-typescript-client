@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
           <Button
             label={"Tips"}
             onClick={() =>
-              state.modal !== null ? hideTipsModal() : displayTipsModal()
+              !!state.modal ? hideTipsModal() : displayTipsModal()
             }
           />
           <Button label={"Documentation"} type={ButtonType.tertiary} />

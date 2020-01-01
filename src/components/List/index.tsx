@@ -1,5 +1,5 @@
 import React from "react";
-import { UnorderedList, ListItem } from "./style";
+import { UnorderedList, ListItem, Container } from "./style";
 import { generateKey } from "../../utils/generateKey";
 
 export interface Item
@@ -10,19 +10,33 @@ export interface Item
 
 interface Props {
   items: Item[];
-  addItem?: (args: Item) => void;
+  displayItemAdditionModal?: () => void;
   removeItem?: (args: Item) => void;
 }
 
-export const List: React.FC<Props> = ({ items, addItem, removeItem }) => {
+export const List: React.FC<Props> = ({
+  items,
+  displayItemAdditionModal,
+  removeItem
+}) => {
   return (
     <UnorderedList>
       {items.map(item => {
         return (
-          <ListItem {...item} key={generateKey(20)}>
+          <ListItem
+            {...item}
+            key={generateKey(20)}
+            withExtraFunctionalities={
+              !!displayItemAdditionModal || !!removeItem
+            }
+          >
             {item.label}
-            {addItem && <span onClick={() => addItem(item)}>add</span>}
-            {removeItem && <span onClick={() => removeItem(item)}>remove</span>}
+            <Container>
+              {displayItemAdditionModal && (
+                <span onClick={displayItemAdditionModal}>➕</span>
+              )}
+              {removeItem && <span onClick={() => removeItem(item)}>➖</span>}
+            </Container>
           </ListItem>
         );
       })}

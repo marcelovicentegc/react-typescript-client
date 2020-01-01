@@ -1,5 +1,7 @@
 # 🍰 react-typescript-client
 
+[![Node CI](https://github.com/marcelovicentegc/react-typescript-client/workflows/Node%20CI/badge.svg)](https://github.com/marcelovicentegc/react-typescript-client/workflows/Node%20CI/badge.svg)
+
 ## Directions
 
 1. Clone this repo: `git clone https://github.com/marcelovicentegc/react-typescript-client.git`

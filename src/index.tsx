@@ -5,6 +5,7 @@ import { theme, Theme } from "./utils/theme";
 import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
 import { LandingPageProvider } from "./contexts/LandingPageContext";
+import { register } from "./serviceWorker";
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     ${props => props.theme.importFontFamily}
@@ -39,3 +40,4 @@ const Root: React.FC = () => {
 };
 
 render(<Root />, document.getElementById("root"));
+register();

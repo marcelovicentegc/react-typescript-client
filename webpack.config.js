@@ -2,6 +2,8 @@ const internalIp = require("internal-ip");
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const ManifestWebpackPlugin = require("webpack-manifest-plugin");
 
 const PORT = 4000;
 
@@ -32,6 +34,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html"),
       filename: "index.html"
+    }),
+    new CopyWebpackPlugin([{ from: "src/pwa" }]),
+    new ManifestWebpackPlugin({
+      fileName: "asset-manifest.json" // Not to confuse with manifest.json
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),

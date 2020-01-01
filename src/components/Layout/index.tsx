@@ -25,7 +25,7 @@ export const Layout: React.FC = () => {
           <br />
           <Span>Now go build something great 😃!</Span>
         </GreetingsBox>
-        <Image src={rocketLaunch} />
+        <Image src={rocketLaunch} alt={"Rocket being launched"} />
       </StyledLayout>
     </LayoutWrapper>
   );

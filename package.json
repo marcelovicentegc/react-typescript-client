@@ -7,16 +7,31 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --progress --host 0.0.0.0"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --progress --host 0.0.0.0",
+    "test": "jest \"(/__tests__/.)*\\.tsx?$\" --coverage --colors --silent",
+    "test:watch": "jest \"(/__tests__/.)*\\.tsx?$\" --coverage --colors --watch"
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "jest": "^24.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "styled-components": "^4.4.1",
     "typescript": "^3.7.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.7.5",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.7",
     "@hot-loader/react-dom": "^16.11.0",
+    "@types/jest": "^24.0.25",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
     "@types/styled-components": "^4.4.0",
@@ -25,6 +40,7 @@
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
     "internal-ip": "^5.0.0",
+    "jest-transform-stub": "^2.0.0",
     "source-map-loader": "^0.2.4",
     "ts-loader": "^6.2.1",
     "webpack": "^4.41.2",

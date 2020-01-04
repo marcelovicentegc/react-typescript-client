@@ -34,4 +34,10 @@ describe("<Button /> test case", () => {
       color: ${theme.color.blue1};`
     );
   });
+
+  test("renders passed label prop", () => {
+    const { getByTestId } = render(<Button label="Click me" />);
+
+    expect(getByTestId("label")).toHaveTextContent("Click me");
+  });
 });

@@ -13,6 +13,8 @@ NPM Audit:
 
 Static Test:
   stage: check
+  before_script:
+    - npm ci
   script:
     - npm run test:static
 

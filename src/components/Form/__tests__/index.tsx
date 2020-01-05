@@ -2,9 +2,6 @@ import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { Form } from "..";
 import { render } from "../../../utils/render";
-import { fireEvent } from "@testing-library/react";
-
-const leftClick = { button: 1 };
 
 const inputs = [
   {

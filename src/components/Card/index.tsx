@@ -3,24 +3,24 @@ import { CardWrapper, StyledCard, Title } from "./style";
 
 interface Props {
   children?: React.ReactNode;
-  title?: string;
-  titleWithFunction?: () => void;
+  withTitle?: {
+    title: string;
+    withFunction?: () => void;
+  };
 }
 
-export const Card: React.SFC<Props> = ({
-  children,
-  title,
-  titleWithFunction
-}) => {
+export const Card: React.SFC<Props> = ({ children, withTitle }) => {
   return (
     <CardWrapper>
       <StyledCard>
-        {title && (
+        {withTitle && (
           <Title
-            hoverable={!!titleWithFunction}
-            onClick={() => (titleWithFunction ? titleWithFunction() : null)}
+            hoverable={!!withTitle.withFunction}
+            onClick={() =>
+              withTitle.withFunction ? withTitle.withFunction() : null
+            }
           >
-            {title}
+            {withTitle.title}
           </Title>
         )}
         {children}

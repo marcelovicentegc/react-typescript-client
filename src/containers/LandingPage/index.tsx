@@ -37,8 +37,10 @@ export const LandingPage: React.FC = () => {
         >
           {state.modal === ModalState.tips && (
             <Card
-              title={"🚀 Tips for a better web app (add a tip)"}
-              titleWithFunction={displayTipAdditionModal}
+              withTitle={{
+                title: "🚀 Tips for a better web app (add a tip)",
+                withFunction: displayTipAdditionModal
+              }}
             >
               <List
                 items={state.tips}
@@ -50,7 +52,7 @@ export const LandingPage: React.FC = () => {
             </Card>
           )}
           {state.modal === ModalState.tipAddition && (
-            <Card title={"➕ Add a tip"}>
+            <Card withTitle={{ title: "➕ Add a tip" }}>
               <Form
                 inputs={[
                   {
@@ -72,7 +74,7 @@ export const LandingPage: React.FC = () => {
             </Card>
           )}
           {state.modal === ModalState.tipEdition && (
-            <Card title={"♻️ Edit a tip"}>
+            <Card withTitle={{ title: "♻️ Edit a tip" }}>
               <Form
                 inputs={[
                   {

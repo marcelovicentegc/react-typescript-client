@@ -3,7 +3,8 @@ import "@testing-library/jest-dom/extend-expect";
 import { Card } from "..";
 import { render } from "../../../utils/render";
 import { fireEvent } from "@testing-library/react";
-import { Button } from "../../Button";
+
+const leftClick = { button: 1 };
 
 describe("<Card /> test case", () => {
   test("test ids are in the document", () => {
@@ -21,26 +22,48 @@ describe("<Card /> test case", () => {
 
     expect(getByTestId("title")).toBeInTheDocument();
     expect(getByTestId("title")).toHaveTextContent("Unit tests");
+    expect(fireEvent.click(getByTestId("title"), leftClick)).toBeTruthy();
   });
 
-  test("renders passed title prop with function associated with it", () => {
+  test("renders passed title prop with a function associated with it", () => {
     const onClick = jest.fn();
     const { getByTestId } = render(
       <Card withTitle={{ title: "Unit tests", withFunction: onClick }} />
     );
 
     expect(getByTestId("title")).toHaveTextContent("Unit tests");
-    fireEvent.click(getByTestId("title"), { button: 1 });
+    fireEvent.click(getByTestId("title"), leftClick);
     expect(onClick).toHaveBeenCalled();
   });
 
   test("renders passed children prop", () => {
     const { container } = render(
       <Card>
-        <Button label={"We are the children! 🚸"} />
+        <div>
+          <span>We are the children! 🚸</span>
+        </div>
       </Card>
     );
 
-    expect(container).toHaveTextContent("We are the children! 🚸");
+    expect(container).toContainHTML(
+      "<div><span>We are the children! 🚸</span></div>"
+    );
+  });
+
+  test("card's title is hoverable", () => {
+    const onClick = jest.fn();
+    const { getByTestId } = render(
+      <Card withTitle={{ title: "Unit tests", withFunction: onClick }} />
+    );
+
+    expect(getByTestId("title")).toHaveStyle("cursor: pointer");
+  });
+
+  test("card's title is not hoverable", () => {
+    const { getByTestId } = render(
+      <Card withTitle={{ title: "Unit tests" }} />
+    );
+
+    expect(getByTestId("title")).toHaveStyle("cursor: default");
   });
 });

@@ -27,10 +27,13 @@ describe("<Button /> test case", () => {
   test("implicitly renders the primary style", () => {
     const { getByTestId } = render(<Button label="Click me" />);
 
-    expect(getByTestId("styledButton")).toHaveStyle(
+    const styledButton = getByTestId("styledButton");
+
+    expect(styledButton).toHaveStyle(
       `background-color: ${theme.color.green1};
       color: ${theme.color.white1};`
     );
+    expect(styledButton).toMatchSnapshot();
   });
 
   test("explicitly renders the primary style", () => {
@@ -38,10 +41,13 @@ describe("<Button /> test case", () => {
       <Button label="Click me" type={ButtonType.primary} />
     );
 
-    expect(getByTestId("styledButton")).toHaveStyle(
+    const styledButton = getByTestId("styledButton");
+
+    expect(styledButton).toHaveStyle(
       `background-color: ${theme.color.green1};
       color: ${theme.color.white1};`
     );
+    expect(styledButton).toMatchSnapshot();
   });
 
   test("renders secondary style", () => {
@@ -49,10 +55,13 @@ describe("<Button /> test case", () => {
       <Button label="Click me" type={ButtonType.secondary} />
     );
 
-    expect(getByTestId("styledButton")).toHaveStyle(
+    const styledButton = getByTestId("styledButton");
+
+    expect(styledButton).toHaveStyle(
       `background-color: ${theme.color.white1};
       color: ${theme.color.blue1};`
     );
+    expect(styledButton).toMatchSnapshot();
   });
 
   test("renders tertiary style", () => {
@@ -60,10 +69,13 @@ describe("<Button /> test case", () => {
       <Button label="Click me" type={ButtonType.tertiary} />
     );
 
-    expect(getByTestId("styledButton")).toHaveStyle(
+    const styledButton = getByTestId("styledButton");
+
+    expect(styledButton).toHaveStyle(
       `background-color: ${theme.color.blue3};
       color: ${theme.color.white1};`
     );
+    expect(styledButton).toMatchSnapshot();
   });
 
   test("renders passed label prop", () => {

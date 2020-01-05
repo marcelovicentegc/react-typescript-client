@@ -11,14 +11,15 @@ interface Props {
 
 export const Card: React.SFC<Props> = ({ children, withTitle }) => {
   return (
-    <CardWrapper>
-      <StyledCard>
+    <CardWrapper data-testid="cardWrapper">
+      <StyledCard data-testid="styledCard">
         {withTitle && (
           <Title
             hoverable={!!withTitle.withFunction}
             onClick={() =>
               withTitle.withFunction ? withTitle.withFunction() : null
             }
+            data-testid="title"
           >
             {withTitle.title}
           </Title>

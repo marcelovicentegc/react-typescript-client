@@ -24,6 +24,26 @@ describe("<Button /> test case", () => {
     expect(onClick).toHaveBeenCalled();
   });
 
+  test("implicitly renders the primary style", () => {
+    const { getByTestId } = render(<Button label="Click me" />);
+
+    expect(getByTestId("styledButton")).toHaveStyle(
+      `background-color: ${theme.color.green1};
+      color: ${theme.color.white1};`
+    );
+  });
+
+  test("explicitly renders the primary style", () => {
+    const { getByTestId } = render(
+      <Button label="Click me" type={ButtonType.primary} />
+    );
+
+    expect(getByTestId("styledButton")).toHaveStyle(
+      `background-color: ${theme.color.green1};
+      color: ${theme.color.white1};`
+    );
+  });
+
   test("renders secondary style", () => {
     const { getByTestId } = render(
       <Button label="Click me" type={ButtonType.secondary} />
@@ -32,6 +52,17 @@ describe("<Button /> test case", () => {
     expect(getByTestId("styledButton")).toHaveStyle(
       `background-color: ${theme.color.white1};
       color: ${theme.color.blue1};`
+    );
+  });
+
+  test("renders tertiary style", () => {
+    const { getByTestId } = render(
+      <Button label="Click me" type={ButtonType.tertiary} />
+    );
+
+    expect(getByTestId("styledButton")).toHaveStyle(
+      `background-color: ${theme.color.blue3};
+      color: ${theme.color.white1};`
     );
   });
 

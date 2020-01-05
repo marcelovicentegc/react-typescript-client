@@ -8,6 +8,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --progress --host 0.0.0.0",
+    "test:static": "tsc -p tsconfig.json --noEmit",
     "test": "jest \"(/__tests__/.)*\\.tsx?$\" --coverage --colors --silent",
     "test:watch": "jest \"(/__tests__/.)*\\.tsx?$\" --coverage --colors --watch"
   },
@@ -34,7 +35,7 @@
     "@types/jest": "^24.0.25",
     "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
-    "@types/styled-components": "^4.4.0",
+    "@types/styled-components": "4.1.8",
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^6.0.3",
     "file-loader": "^5.0.2",

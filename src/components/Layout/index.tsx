@@ -7,8 +7,8 @@ interface Props {
 
 export const Layout: React.SFC<Props> = ({ children }) => {
   return (
-    <LayoutWrapper>
-      <StyledLayout>{children}</StyledLayout>
+    <LayoutWrapper data-testid="layoutWrapper">
+      <StyledLayout data-testid="styledLayout">{children}</StyledLayout>
     </LayoutWrapper>
   );
 };

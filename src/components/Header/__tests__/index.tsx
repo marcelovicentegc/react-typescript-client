@@ -3,10 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { Header } from "..";
 import { render } from "../../../utils/render";
 import { fireEvent } from "@testing-library/react";
-import {
-  LandingPageContext,
-  ModalState
-} from "../../../contexts/LandingPageContext";
+import * as LandingPageContext from "../../../contexts/LandingPageContext";
 
 describe("<Header /> test case", () => {
   test("test ids are in the document", () => {
@@ -28,30 +25,42 @@ describe("<Header /> test case", () => {
   });
 
   test("buttons are clickable", () => {
-    let modalState: ModalState | null = null;
-    const dispatchCallback = jest.fn(() => {
-      if (!modalState) {
-        modalState = ModalState.tips;
-      } else {
-        modalState = null;
-      }
-    });
     window.open = jest.fn();
-    const { getByText } = render(
-      <LandingPageContext.Provider
-        value={{ state: { modal: modalState }, dispatch: dispatchCallback }}
-      >
-        <Header />
-      </LandingPageContext.Provider>
-    );
+    const state: LandingPageContext.LandingPageState = { modal: null };
+    const hideTipsModal = jest.fn(() => {
+      state.modal = null;
+    });
+    const displayTipsModal = jest.fn(() => {
+      state.modal = LandingPageContext.ModalState.tips;
+    });
+    const dispatchCallback = jest.fn();
+    jest
+      .spyOn(LandingPageContext, "useLandingPageContext")
+      .mockImplementation(() => {
+        return {
+          state,
+          displayTipsModal,
+          hideTipsModal,
+          dispatch: dispatchCallback,
+          displayTipAdditionModal: dispatchCallback,
+          displayTipEditionModal: dispatchCallback,
+          addTip: dispatchCallback,
+          removeTip: dispatchCallback,
+          editTip: dispatchCallback
+        };
+      });
 
-    fireEvent.click(getByText("Tips"));
+    const { getByText } = render(<Header />);
+
+    const tips = getByText("Tips");
+
+    fireEvent.click(tips);
+    expect(displayTipsModal).toHaveBeenCalled();
+    expect(state.modal === LandingPageContext.ModalState.tips);
+    fireEvent.click(tips);
+    expect(hideTipsModal).toHaveBeenCalled();
+    expect(state.modal === null);
     fireEvent.click(getByText("Github"));
     expect(window.open).toHaveBeenCalled();
-    expect(dispatchCallback).toHaveBeenCalled();
-    expect(modalState).toBe(ModalState.tips);
-    fireEvent.click(getByText("Tips"));
-    expect(dispatchCallback).toHaveBeenCalledTimes(2);
-    expect(modalState).toBe(null);
   });
 });

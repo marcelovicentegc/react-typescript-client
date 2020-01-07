@@ -161,6 +161,7 @@ export {
   LandingPageProvider,
   LandingPageContext,
   useLandingPageContext,
+  LandingPageState,
   ModalState,
   LandingPageActionType,
   Tip

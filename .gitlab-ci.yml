@@ -27,5 +27,7 @@ Build:
 
 Unit Test:
   stage: test
+  before_script:
+    - npm ci
   script:
     - npm test

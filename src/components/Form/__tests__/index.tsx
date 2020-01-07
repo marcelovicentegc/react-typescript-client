@@ -6,25 +6,19 @@ import { render } from "../../../utils/render";
 const inputs = [
   {
     type: "text",
-    onChange: jest.fn(
-      (e: React.ChangeEvent<HTMLInputElement>) => e.target.value
-    ),
+    onChange: jest.fn(),
     placeholder: "this is a tip 1",
     value: ""
   },
   {
     type: "text",
-    onChange: jest.fn(
-      (e: React.ChangeEvent<HTMLInputElement>) => e.target.value
-    ),
+    onChange: jest.fn(),
     placeholder: "this is a tip 2",
     value: ""
   },
   {
     type: "text",
-    onChange: jest.fn(
-      (e: React.ChangeEvent<HTMLInputElement>) => e.target.value
-    ),
+    onChange: jest.fn(),
     placeholder: "this is a tip 3",
     value: ""
   }

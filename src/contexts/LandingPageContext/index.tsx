@@ -159,6 +159,7 @@ const LandingPageProvider: React.FC<LandingPageProviderProps> = props => {
 
 export {
   LandingPageProvider,
+  LandingPageContext,
   useLandingPageContext,
   ModalState,
   LandingPageActionType,

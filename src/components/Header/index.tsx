@@ -13,12 +13,12 @@ export const Header: React.FC = () => {
   const { state, displayTipsModal, hideTipsModal } = useLandingPageContext();
 
   return (
-    <HeaderWrapper>
-      <StyledHeader>
-        <LeftSide>
-          <AppTitle />
+    <HeaderWrapper data-testid="headerWrapper">
+      <StyledHeader data-testid="styledHeader">
+        <LeftSide data-testid="leftSide">
+          <AppTitle data-testid="appTitle" />
         </LeftSide>
-        <RightSide>
+        <RightSide data-testid="rightSide ">
           <Button
             label={"Tips"}
             onClick={() =>

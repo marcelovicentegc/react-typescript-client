@@ -20,6 +20,7 @@ export const Card: React.SFC<Props> = ({ children, withTitle }) => {
               withTitle.withFunction ? withTitle.withFunction() : null
             }
             data-testid="title"
+            role="button"
           >
             {withTitle.title}
           </Title>

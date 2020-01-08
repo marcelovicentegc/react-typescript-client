@@ -29,6 +29,7 @@ export const LandingPage: React.FC = () => {
     <>
       {!!state.modal && (
         <CardWrapper
+          data-testid="innerCardWrapper"
           onClick={e => {
             if (e.target === e.currentTarget) {
               hideTipsModal();
@@ -98,10 +99,12 @@ export const LandingPage: React.FC = () => {
           )}
         </CardWrapper>
       )}
-      <GreetingsBox>
-        <Span>The install worked successfully! Congratulations! </Span>
+      <GreetingsBox data-testid="greetingsBox">
+        <Span data-testid="span">
+          The install worked successfully! Congratulations!
+        </Span>
         <br />
-        <Span>Now go build something great 😃!</Span>
+        <Span data-testid="span">Now go build something great 😃!</Span>
       </GreetingsBox>
       <Image src={rocketLaunch} alt={"Rocket being launched"} />
     </>

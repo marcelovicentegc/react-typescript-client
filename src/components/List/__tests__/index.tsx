@@ -37,7 +37,15 @@ describe("<List /> test case", () => {
       />
     );
 
-    expect(queryAllByText(/♻️/i)).toHaveLength(tips.length);
+    const editItemButtons = queryAllByText(/♻️/i);
+
+    expect(editItemButtons).toHaveLength(tips.length);
+
+    for (let i = 0; i < editItemButtons.length; i++) {
+      fireEvent.click(editItemButtons[i]);
+    }
+
+    expect(mockFunction).toHaveBeenCalledTimes(editItemButtons.length * 3);
   });
 
   test("renders remove option when removeItem function is passed", () => {
@@ -46,13 +54,13 @@ describe("<List /> test case", () => {
       <List items={tips} removeItem={removeItem} />
     );
 
-    const removeItemButton = queryAllByText(/➖/i);
-    expect(removeItemButton).toHaveLength(tips.length);
+    const removeItemButtons = queryAllByText(/➖/i);
+    expect(removeItemButtons).toHaveLength(tips.length);
 
-    for (let i = 0; i < removeItemButton.length; i++) {
-      fireEvent.click(removeItemButton[i]);
+    for (let i = 0; i < removeItemButtons.length; i++) {
+      fireEvent.click(removeItemButtons[i]);
     }
 
-    expect(removeItem).toHaveBeenCalledTimes(removeItemButton.length);
+    expect(removeItem).toHaveBeenCalledTimes(removeItemButtons.length);
   });
 });

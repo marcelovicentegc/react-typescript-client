@@ -17,20 +17,21 @@ export const LandingPage: React.FC = () => {
   } = useLandingPageContext();
 
   return (
-    <React.Suspense fallback={"loading..."}>
-      {!!state.modal && (
-        <Modal
-          state={state}
-          hideTipsModal={hideTipsModal}
-          addTip={addTip}
-          displayTipAdditionModal={displayTipAdditionModal}
-          displayTipEditionModal={displayTipEditionModal}
-          displayTipsModal={displayTipsModal}
-          removeTip={removeTip}
-          editTip={editTip}
-          data-testid="modal"
-        />
-      )}
+    <>
+      <React.Suspense fallback={"loading..."}>
+        {!!state.modal && (
+          <Modal
+            state={state}
+            hideTipsModal={hideTipsModal}
+            addTip={addTip}
+            displayTipAdditionModal={displayTipAdditionModal}
+            displayTipEditionModal={displayTipEditionModal}
+            displayTipsModal={displayTipsModal}
+            removeTip={removeTip}
+            editTip={editTip}
+          />
+        )}
+      </React.Suspense>
       <GreetingsBox data-testid="greetingsBox">
         <Span data-testid="span">
           The install worked successfully! Congratulations!
@@ -39,6 +40,6 @@ export const LandingPage: React.FC = () => {
         <Span data-testid="span">Now go build something great 😃!</Span>
       </GreetingsBox>
       <Image src={rocketLaunch} alt={"Rocket being launched"} />
-    </React.Suspense>
+    </>
   );
 };

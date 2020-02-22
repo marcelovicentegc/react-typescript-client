@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  useLandingPageContext,
   ModalState,
   LandingPageState,
   Tip
@@ -45,7 +44,7 @@ export const Modal: React.FC<ModalProps> = ({
         }
       }}
     >
-      {state.modal === ModalState.tips && (
+      {state.modal === ModalState.tips && state.tips && (
         <Card
           withTitle={{
             title: "🚀 Tips for a better web app (add a tip)",

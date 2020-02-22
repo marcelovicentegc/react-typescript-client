@@ -2,7 +2,7 @@ import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { ButtonGroup } from "..";
 import { render } from "../../../../utils/render";
-import { fireEvent, getByText } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import { generateKey } from "../../../../utils/generateKey";
 import { Tip } from "../../../../contexts/LandingPageContext";
 

@@ -26,10 +26,11 @@ const inputs = [
 
 describe("<Form /> test case", () => {
   test("test ids are in the document", () => {
-    const { getByTestId, queryAllByTestId } = render(<Form inputs={inputs} />);
+    const { getByTestId } = render(<Form inputs={inputs} />);
 
     expect(getByTestId("formWrapper")).toBeInTheDocument();
     expect(getByTestId("styledForm")).toBeInTheDocument();
-    expect(queryAllByTestId("input", { exact: false })).toHaveLength(3);
+    const inputElements = document.getElementsByTagName("input");
+    expect(inputElements).toHaveLength(3);
   });
 });

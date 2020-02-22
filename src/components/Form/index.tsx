@@ -11,7 +11,7 @@ export const Form: React.SFC<Props> = ({ inputs, ...props }) => {
     <FormWrapper data-testid="formWrapper">
       <StyledForm {...props} data-testid="styledForm">
         {inputs.map((input, i) => {
-          return <Input {...input} key={i} data-testid={`input-${i}`} />;
+          return <Input {...input} key={i} />;
         })}
       </StyledForm>
     </FormWrapper>

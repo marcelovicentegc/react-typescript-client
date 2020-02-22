@@ -2,12 +2,19 @@ import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { LandingPage } from "..";
 import { render } from "../../../utils/render";
-import { fireEvent } from "@testing-library/react";
+import {
+  fireEvent,
+  wait,
+  cleanup,
+  waitForElement
+} from "@testing-library/react";
 import { tips } from "../../../utils/mocks";
 import {
   LandingPageContext,
   ModalState
 } from "../../../contexts/LandingPageContext";
+
+afterEach(cleanup);
 
 describe("<LandingPage /> test case", () => {
   test("test ids and default content are in the document", () => {
@@ -22,7 +29,7 @@ describe("<LandingPage /> test case", () => {
     expect(container.getElementsByTagName("img")).toHaveLength(1);
   });
 
-  test("renders tips card", () => {
+  test("renders tips card", async () => {
     const mockFunction = jest.fn();
     const tree = (
       <LandingPageContext.Provider
@@ -39,22 +46,24 @@ describe("<LandingPage /> test case", () => {
     );
     const { getByText, getByTestId } = render(tree);
 
-    const cardWrapper = getByTestId("innerCardWrapper");
-    const card = getByText("🚀 Tips for a better web app (add a tip)");
-    const listItems = document.getElementsByTagName("li");
+    await wait(() => {
+      const modal = getByTestId("innerCardWrapper");
+      expect(modal).toBeInTheDocument();
+      fireEvent.click(modal);
+      expect(mockFunction).toHaveBeenCalled();
 
-    expect(cardWrapper).toBeInTheDocument();
-    fireEvent.click(cardWrapper);
-    expect(mockFunction).toHaveBeenCalled();
+      const card = getByText("🚀 Tips for a better web app (add a tip)");
+      const listItems = document.getElementsByTagName("li");
 
-    expect(card).toBeVisible();
-    fireEvent.click(card);
-    expect(mockFunction).toHaveBeenCalledTimes(2);
+      expect(card).toBeVisible();
+      fireEvent.click(card);
+      expect(mockFunction).toHaveBeenCalledTimes(2);
 
-    expect(listItems.length).toBe(tips.length);
+      expect(listItems.length).toBe(tips.length);
+    });
   });
 
-  test("renders tips addition modal", () => {
+  test("renders tips addition modal", async () => {
     const tree = (
       <LandingPageContext.Provider
         value={{
@@ -66,12 +75,14 @@ describe("<LandingPage /> test case", () => {
         <LandingPage />
       </LandingPageContext.Provider>
     );
-    const { queryByText, getByTestId, getByDisplayValue } = render(tree);
+    const { queryByText, getByDisplayValue, container } = render(tree);
 
-    const inputs = document.getElementsByTagName("input");
+    const inputs = await waitForElement(() =>
+      container.getElementsByTagName("input")
+    );
+
     const inputValue = "Test what you're writing!";
 
-    expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
     expect(queryByText(/Add a tip/i)).not.toBeNull();
     expect(inputs.length).toBe(1);
     fireEvent.change(inputs[0], {
@@ -80,7 +91,7 @@ describe("<LandingPage /> test case", () => {
     expect(getByDisplayValue(inputValue)).toBeInTheDocument();
   });
 
-  test("renders tips edition modal", () => {
+  test("renders tips edition modal", async () => {
     const tree = (
       <LandingPageContext.Provider
         value={{
@@ -94,16 +105,18 @@ describe("<LandingPage /> test case", () => {
     );
     const { queryByText, getByTestId, getByDisplayValue } = render(tree);
 
-    const inputs = document.getElementsByTagName("input");
-    const inputValue = "Test what you're writing!";
+    await wait(() => {
+      const inputs = document.getElementsByTagName("input");
+      const inputValue = "Test what you're writing!";
 
-    expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
-    expect(queryByText(/Edit a tip/i)).not.toBeNull();
+      expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
+      expect(queryByText(/Edit a tip/i)).not.toBeNull();
 
-    expect(inputs.length).toBe(1);
-    fireEvent.change(inputs[0], {
-      target: { value: inputValue }
+      expect(inputs.length).toBe(1);
+      fireEvent.change(inputs[0], {
+        target: { value: inputValue }
+      });
+      expect(getByDisplayValue(inputValue)).toBeInTheDocument();
     });
-    expect(getByDisplayValue(inputValue)).toBeInTheDocument();
   });
 });

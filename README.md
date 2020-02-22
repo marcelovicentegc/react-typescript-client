@@ -18,7 +18,7 @@
 
 - Unit testing library:
 
-  1. **Reat Testing Library**
+  1. **React Testing Library**
 
 ## Directions
 

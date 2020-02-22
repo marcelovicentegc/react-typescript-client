@@ -16,6 +16,10 @@
 
   1. **Styed Components**
 
+- Unit testing library:
+
+  1. **Reat Testing Library**
+
 ## Directions
 
 1. Clone this repo: `git clone https://github.com/marcelovicentegc/react-typescript-client.git`

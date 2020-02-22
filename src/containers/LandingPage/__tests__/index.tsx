@@ -3,8 +3,11 @@ import "@testing-library/jest-dom/extend-expect";
 import { LandingPage } from "..";
 import { render } from "../../../utils/render";
 import { fireEvent } from "@testing-library/react";
-import * as LandingPageContext from "../../../contexts/LandingPageContext";
 import { tips } from "../../../utils/mocks";
+import {
+  LandingPageContext,
+  ModalState
+} from "../../../contexts/LandingPageContext";
 
 describe("<LandingPage /> test case", () => {
   test("test ids and default content are in the document", () => {
@@ -19,20 +22,60 @@ describe("<LandingPage /> test case", () => {
     expect(container.getElementsByTagName("img")).toHaveLength(1);
   });
 
-  //   test("renders tips addition card", () => {
-  // const { getByText, getByTestId, getByRole } = render(<LandingPage />);
+  test("renders tips card", () => {
+    const tree = (
+      <LandingPageContext.Provider
+        value={{
+          state: {
+            modal: ModalState.tips,
+            tips
+          }
+        }}
+      >
+        <LandingPage />
+      </LandingPageContext.Provider>
+    );
+    const { getByText, getByTestId } = render(tree);
 
-  // expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
-  // expect(getByText("🚀 Tips for a better web app (add a tip)")).toBeVisible();
-  // fireEvent.click(getByRole("button"));
-  // expect(getByText("➕ Add a tip")).toBeVisible();
-  // const tips = getByText("Tips");
+    expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
+    expect(getByText("🚀 Tips for a better web app (add a tip)")).toBeVisible();
+    const listItems = document.getElementsByTagName("li");
+    expect(listItems.length).toBe(tips.length);
+  });
 
-  // fireEvent.click(tips);
-  // expect(displayTipsModal).toHaveBeenCalled();
-  // expect(state.modal === LandingPageContext.ModalState.tips);
-  // fireEvent.click(tips);
-  // expect(hideTipsModal).toHaveBeenCalled();
-  // expect(state.modal === null);
-  //   });
+  test("renders tips addition modal", () => {
+    const tree = (
+      <LandingPageContext.Provider
+        value={{
+          state: {
+            modal: ModalState.tipAddition
+          }
+        }}
+      >
+        <LandingPage />
+      </LandingPageContext.Provider>
+    );
+    const { queryByText, getByTestId } = render(tree);
+
+    expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
+    expect(queryByText(/Add a tip/i)).not.toBeNull();
+  });
+
+  test("renders tips edition modal", () => {
+    const tree = (
+      <LandingPageContext.Provider
+        value={{
+          state: {
+            modal: ModalState.tipEdition
+          }
+        }}
+      >
+        <LandingPage />
+      </LandingPageContext.Provider>
+    );
+    const { queryByText, getByTestId } = render(tree);
+
+    expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
+    expect(queryByText(/Edit a tip/i)).not.toBeNull();
+  });
 });

@@ -36,16 +36,16 @@ interface LandingPageAction {
   args?: Tip;
 }
 
-interface LandingPageContextInterface {
+export interface LandingPageContextInterface {
   state: LandingPageState;
-  dispatch(action: LandingPageAction, args?: Tip): void;
+  dispatch?: (action: LandingPageAction, args?: Tip) => void;
 }
 
 const LandingPageContext = React.createContext<LandingPageContextInterface | null>(
   null
 );
 
-const landingPageReducer = (
+export const landingPageReducer = (
   state: LandingPageState,
   action: LandingPageAction
 ): LandingPageState => {

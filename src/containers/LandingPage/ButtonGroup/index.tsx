@@ -20,7 +20,7 @@ export const ButtonGroup: React.SFC<Props> = ({
   tipKey
 }) => {
   return (
-    <StyledButtonGroup>
+    <StyledButtonGroup data-testid="styledButtonGroup">
       <Button
         type={ButtonType.tertiary}
         label={"Go back"}

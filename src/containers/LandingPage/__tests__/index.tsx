@@ -23,13 +23,15 @@ describe("<LandingPage /> test case", () => {
   });
 
   test("renders tips card", () => {
+    const mockFunction = jest.fn();
     const tree = (
       <LandingPageContext.Provider
         value={{
           state: {
             modal: ModalState.tips,
             tips
-          }
+          },
+          dispatch: mockFunction
         }}
       >
         <LandingPage />
@@ -37,9 +39,18 @@ describe("<LandingPage /> test case", () => {
     );
     const { getByText, getByTestId } = render(tree);
 
-    expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
-    expect(getByText("🚀 Tips for a better web app (add a tip)")).toBeVisible();
+    const cardWrapper = getByTestId("innerCardWrapper");
+    const card = getByText("🚀 Tips for a better web app (add a tip)");
     const listItems = document.getElementsByTagName("li");
+
+    expect(cardWrapper).toBeInTheDocument();
+    fireEvent.click(cardWrapper);
+    expect(mockFunction).toHaveBeenCalled();
+
+    expect(card).toBeVisible();
+    fireEvent.click(card);
+    expect(mockFunction).toHaveBeenCalledTimes(2);
+
     expect(listItems.length).toBe(tips.length);
   });
 
@@ -55,10 +66,18 @@ describe("<LandingPage /> test case", () => {
         <LandingPage />
       </LandingPageContext.Provider>
     );
-    const { queryByText, getByTestId } = render(tree);
+    const { queryByText, getByTestId, getByDisplayValue } = render(tree);
+
+    const inputs = document.getElementsByTagName("input");
+    const inputValue = "Test what you're writing!";
 
     expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
     expect(queryByText(/Add a tip/i)).not.toBeNull();
+    expect(inputs.length).toBe(1);
+    fireEvent.change(inputs[0], {
+      target: { value: inputValue }
+    });
+    expect(getByDisplayValue(inputValue)).toBeInTheDocument();
   });
 
   test("renders tips edition modal", () => {

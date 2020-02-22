@@ -92,9 +92,18 @@ describe("<LandingPage /> test case", () => {
         <LandingPage />
       </LandingPageContext.Provider>
     );
-    const { queryByText, getByTestId } = render(tree);
+    const { queryByText, getByTestId, getByDisplayValue } = render(tree);
+
+    const inputs = document.getElementsByTagName("input");
+    const inputValue = "Test what you're writing!";
 
     expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
     expect(queryByText(/Edit a tip/i)).not.toBeNull();
+
+    expect(inputs.length).toBe(1);
+    fireEvent.change(inputs[0], {
+      target: { value: inputValue }
+    });
+    expect(getByDisplayValue(inputValue)).toBeInTheDocument();
   });
 });

@@ -1,13 +1,14 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { Button, ButtonType } from "..";
-import { render } from "../../../utils/render";
+import { withTheme } from "../../../utils/render";
 import { fireEvent } from "@testing-library/react";
 import { theme } from "../../../utils/theme";
+import { render } from "@testing-library/react";
 
 describe("<Button /> test case", () => {
   test("test ids are in the document", () => {
-    const { getByTestId } = render(<Button label="Click me" />);
+    const { getByTestId } = render(withTheme(<Button label="Click me" />));
 
     expect(getByTestId("buttonWrapper")).toBeInTheDocument();
     expect(getByTestId("styledButton")).toBeInTheDocument();
@@ -17,7 +18,7 @@ describe("<Button /> test case", () => {
   test("onClick prop is called", () => {
     const onClick = jest.fn();
     const { getByTestId } = render(
-      <Button label="Click me" onClick={onClick} />
+      withTheme(<Button label="Click me" onClick={onClick} />)
     );
 
     fireEvent.click(getByTestId("styledButton"), { button: 1 });
@@ -25,7 +26,7 @@ describe("<Button /> test case", () => {
   });
 
   test("implicitly renders the primary style", () => {
-    const { getByTestId } = render(<Button label="Click me" />);
+    const { getByTestId } = render(withTheme(<Button label="Click me" />));
 
     const styledButton = getByTestId("styledButton");
 
@@ -38,7 +39,7 @@ describe("<Button /> test case", () => {
 
   test("explicitly renders the primary style", () => {
     const { getByTestId } = render(
-      <Button label="Click me" type={ButtonType.primary} />
+      withTheme(<Button label="Click me" type={ButtonType.primary} />)
     );
 
     const styledButton = getByTestId("styledButton");
@@ -52,7 +53,7 @@ describe("<Button /> test case", () => {
 
   test("renders secondary style", () => {
     const { getByTestId } = render(
-      <Button label="Click me" type={ButtonType.secondary} />
+      withTheme(<Button label="Click me" type={ButtonType.secondary} />)
     );
 
     const styledButton = getByTestId("styledButton");
@@ -66,7 +67,7 @@ describe("<Button /> test case", () => {
 
   test("renders tertiary style", () => {
     const { getByTestId } = render(
-      <Button label="Click me" type={ButtonType.tertiary} />
+      withTheme(<Button label="Click me" type={ButtonType.tertiary} />)
     );
 
     const styledButton = getByTestId("styledButton");
@@ -79,7 +80,7 @@ describe("<Button /> test case", () => {
   });
 
   test("renders passed label prop", () => {
-    const { getByTestId } = render(<Button label="Click me" />);
+    const { getByTestId } = render(withTheme(<Button label="Click me" />));
 
     expect(getByTestId("label")).toHaveTextContent("Click me");
   });

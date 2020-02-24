@@ -1,13 +1,13 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { Header } from "..";
-import { render } from "../../../utils/render";
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import * as LandingPageContext from "../../../contexts/LandingPageContext";
+import { withTheme, withContextProvider } from "../../../utils/render";
 
 describe("<Header /> test case", () => {
   test("test ids are in the document", () => {
-    const { getByTestId } = render(<Header />);
+    const { getByTestId } = render(withTheme(withContextProvider(<Header />)));
 
     expect(getByTestId("headerWrapper")).toBeInTheDocument();
     expect(getByTestId("styledHeader")).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe("<Header /> test case", () => {
   });
 
   test("renders buttons", () => {
-    const { getByText } = render(<Header />);
+    const { getByText } = render(withTheme(withContextProvider(<Header />)));
 
     expect(getByText("Tips")).toBeInTheDocument();
     expect(getByText("Documentation")).toBeInTheDocument();
@@ -50,7 +50,7 @@ describe("<Header /> test case", () => {
         };
       });
 
-    const { getByText } = render(<Header />);
+    const { getByText } = render(withTheme(withContextProvider(<Header />)));
 
     const tips = getByText("Tips");
 

@@ -1,7 +1,8 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { Form } from "..";
-import { render } from "../../../utils/render";
+import { render } from "@testing-library/react";
+import { withTheme } from "../../../utils/render";
 
 const inputs = [
   {
@@ -26,7 +27,7 @@ const inputs = [
 
 describe("<Form /> test case", () => {
   test("test ids are in the document", () => {
-    const { getByTestId } = render(<Form inputs={inputs} />);
+    const { getByTestId } = render(withTheme(<Form inputs={inputs} />));
 
     expect(getByTestId("formWrapper")).toBeInTheDocument();
     expect(getByTestId("styledForm")).toBeInTheDocument();

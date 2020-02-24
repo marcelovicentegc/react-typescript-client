@@ -1,21 +1,23 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { ButtonGroup } from "..";
-import { render } from "../../../../utils/render";
-import { fireEvent } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { generateKey } from "../../../../utils/generateKey";
 import { Tip } from "../../../../contexts/LandingPageContext";
+import { withTheme } from "../../../../utils/render";
 
 describe("<ButtonGroup /> test case", () => {
   test("test ids are in the document and button labels are visible", () => {
     const mockFunction = jest.fn();
     const { getByTestId, getByText, getAllByRole, queryByText } = render(
-      <ButtonGroup
-        tipLabel={"Don't repeat yourself"}
-        setTipLabel={mockFunction}
-        displayTipsModal={mockFunction}
-        tipFunction={mockFunction}
-      />
+      withTheme(
+        <ButtonGroup
+          tipLabel={"Don't repeat yourself"}
+          setTipLabel={mockFunction}
+          displayTipsModal={mockFunction}
+          tipFunction={mockFunction}
+        />
+      )
     );
 
     expect(getByTestId("styledButtonGroup")).toBeInTheDocument();
@@ -27,12 +29,14 @@ describe("<ButtonGroup /> test case", () => {
   test("functions get called", () => {
     const mockFunction = jest.fn();
     const { getAllByRole } = render(
-      <ButtonGroup
-        tipLabel={"Don't repeat yourself"}
-        setTipLabel={mockFunction}
-        displayTipsModal={mockFunction}
-        tipFunction={mockFunction}
-      />
+      withTheme(
+        <ButtonGroup
+          tipLabel={"Don't repeat yourself"}
+          setTipLabel={mockFunction}
+          displayTipsModal={mockFunction}
+          tipFunction={mockFunction}
+        />
+      )
     );
 
     const buttons = getAllByRole("button");
@@ -49,13 +53,15 @@ describe("<ButtonGroup /> test case", () => {
     });
     const key = generateKey(20);
     const { getAllByRole } = render(
-      <ButtonGroup
-        tipLabel={"Don't repeat yourself"}
-        setTipLabel={mockFunction}
-        displayTipsModal={mockFunction}
-        tipFunction={tipFunction}
-        tipKey={key}
-      />
+      withTheme(
+        <ButtonGroup
+          tipLabel={"Don't repeat yourself"}
+          setTipLabel={mockFunction}
+          displayTipsModal={mockFunction}
+          tipFunction={tipFunction}
+          tipKey={key}
+        />
+      )
     );
 
     fireEvent.click(getAllByRole("button")[1]);

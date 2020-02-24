@@ -1,15 +1,12 @@
 import React from "react";
-import { render as testingLibraryRender } from "@testing-library/react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./theme";
 import { LandingPageProvider } from "../contexts/LandingPageContext";
 
-export const render = (ui: React.ReactElement) => {
-  return {
-    ...testingLibraryRender(
-      <ThemeProvider theme={theme}>
-        <LandingPageProvider>{ui}</LandingPageProvider>
-      </ThemeProvider>
-    )
-  };
+export const withTheme = (children: React.ReactElement) => {
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+};
+
+export const withContextProvider = (children: React.ReactElement) => {
+  return <LandingPageProvider>{children}</LandingPageProvider>;
 };

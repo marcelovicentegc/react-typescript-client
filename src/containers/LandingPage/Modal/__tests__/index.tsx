@@ -1,27 +1,29 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { Modal } from "..";
-import { fireEvent } from "@testing-library/react";
-import { render } from "../../../../utils/render";
+import { fireEvent, render } from "@testing-library/react";
 import { ModalState } from "../../../../contexts/LandingPageContext";
 import { tips } from "../../../../utils/mocks";
+import { withTheme } from "../../../../utils/render";
 
 describe("<Modal /> test case", () => {
   test("test ids are in the document", () => {
     const mockFunction = jest.fn();
     const { getByTestId } = render(
-      <Modal
-        state={{
-          modal: ModalState.tips
-        }}
-        displayTipAdditionModal={mockFunction}
-        displayTipEditionModal={mockFunction}
-        displayTipsModal={mockFunction}
-        editTip={mockFunction}
-        addTip={mockFunction}
-        removeTip={mockFunction}
-        hideTipsModal={mockFunction}
-      />
+      withTheme(
+        <Modal
+          state={{
+            modal: ModalState.tips
+          }}
+          displayTipAdditionModal={mockFunction}
+          displayTipEditionModal={mockFunction}
+          displayTipsModal={mockFunction}
+          editTip={mockFunction}
+          addTip={mockFunction}
+          removeTip={mockFunction}
+          hideTipsModal={mockFunction}
+        />
+      )
     );
 
     expect(getByTestId("innerCardWrapper")).toBeInTheDocument();
@@ -30,19 +32,21 @@ describe("<Modal /> test case", () => {
   test("tips are rendered", () => {
     const mockFunction = jest.fn();
     const { container } = render(
-      <Modal
-        state={{
-          modal: ModalState.tips,
-          tips
-        }}
-        displayTipAdditionModal={mockFunction}
-        displayTipEditionModal={mockFunction}
-        displayTipsModal={mockFunction}
-        editTip={mockFunction}
-        addTip={mockFunction}
-        removeTip={mockFunction}
-        hideTipsModal={mockFunction}
-      />
+      withTheme(
+        <Modal
+          state={{
+            modal: ModalState.tips,
+            tips
+          }}
+          displayTipAdditionModal={mockFunction}
+          displayTipEditionModal={mockFunction}
+          displayTipsModal={mockFunction}
+          editTip={mockFunction}
+          addTip={mockFunction}
+          removeTip={mockFunction}
+          hideTipsModal={mockFunction}
+        />
+      )
     );
 
     const listItems = container.getElementsByTagName("li");
@@ -52,19 +56,21 @@ describe("<Modal /> test case", () => {
   test("tips are rendered", () => {
     const mockFunction = jest.fn();
     const { container, queryByText } = render(
-      <Modal
-        state={{
-          modal: ModalState.tips,
-          tips
-        }}
-        displayTipAdditionModal={mockFunction}
-        displayTipEditionModal={mockFunction}
-        displayTipsModal={mockFunction}
-        editTip={mockFunction}
-        addTip={mockFunction}
-        removeTip={mockFunction}
-        hideTipsModal={mockFunction}
-      />
+      withTheme(
+        <Modal
+          state={{
+            modal: ModalState.tips,
+            tips
+          }}
+          displayTipAdditionModal={mockFunction}
+          displayTipEditionModal={mockFunction}
+          displayTipsModal={mockFunction}
+          editTip={mockFunction}
+          addTip={mockFunction}
+          removeTip={mockFunction}
+          hideTipsModal={mockFunction}
+        />
+      )
     );
 
     const listItems = container.getElementsByTagName("li");
@@ -77,18 +83,20 @@ describe("<Modal /> test case", () => {
   test("tips addition modal is rendered", () => {
     const mockFunction = jest.fn();
     const { container, queryByText, getByDisplayValue } = render(
-      <Modal
-        state={{
-          modal: ModalState.tipAddition
-        }}
-        displayTipAdditionModal={mockFunction}
-        displayTipEditionModal={mockFunction}
-        displayTipsModal={mockFunction}
-        editTip={mockFunction}
-        addTip={mockFunction}
-        removeTip={mockFunction}
-        hideTipsModal={mockFunction}
-      />
+      withTheme(
+        <Modal
+          state={{
+            modal: ModalState.tipAddition
+          }}
+          displayTipAdditionModal={mockFunction}
+          displayTipEditionModal={mockFunction}
+          displayTipsModal={mockFunction}
+          editTip={mockFunction}
+          addTip={mockFunction}
+          removeTip={mockFunction}
+          hideTipsModal={mockFunction}
+        />
+      )
     );
 
     const inputs = container.getElementsByTagName("input");
@@ -106,18 +114,20 @@ describe("<Modal /> test case", () => {
   test("tips edition modal is rendered", () => {
     const mockFunction = jest.fn();
     const { container, queryByText, getByDisplayValue } = render(
-      <Modal
-        state={{
-          modal: ModalState.tipEdition
-        }}
-        displayTipAdditionModal={mockFunction}
-        displayTipEditionModal={mockFunction}
-        displayTipsModal={mockFunction}
-        editTip={mockFunction}
-        addTip={mockFunction}
-        removeTip={mockFunction}
-        hideTipsModal={mockFunction}
-      />
+      withTheme(
+        <Modal
+          state={{
+            modal: ModalState.tipEdition
+          }}
+          displayTipAdditionModal={mockFunction}
+          displayTipEditionModal={mockFunction}
+          displayTipsModal={mockFunction}
+          editTip={mockFunction}
+          addTip={mockFunction}
+          removeTip={mockFunction}
+          hideTipsModal={mockFunction}
+        />
+      )
     );
 
     const inputs = container.getElementsByTagName("input");
@@ -136,18 +146,20 @@ describe("<Modal /> test case", () => {
     const mockFunction = jest.fn();
     const hideTipsModal = jest.fn();
     const { getByTestId } = render(
-      <Modal
-        state={{
-          modal: ModalState.tipEdition
-        }}
-        displayTipAdditionModal={mockFunction}
-        displayTipEditionModal={mockFunction}
-        displayTipsModal={mockFunction}
-        editTip={mockFunction}
-        addTip={mockFunction}
-        removeTip={mockFunction}
-        hideTipsModal={hideTipsModal}
-      />
+      withTheme(
+        <Modal
+          state={{
+            modal: ModalState.tipEdition
+          }}
+          displayTipAdditionModal={mockFunction}
+          displayTipEditionModal={mockFunction}
+          displayTipsModal={mockFunction}
+          editTip={mockFunction}
+          addTip={mockFunction}
+          removeTip={mockFunction}
+          hideTipsModal={hideTipsModal}
+        />
+      )
     );
 
     fireEvent.click(getByTestId("innerCardWrapper"));
@@ -158,18 +170,20 @@ describe("<Modal /> test case", () => {
     const mockFunction = jest.fn();
     const hideTipsModal = jest.fn();
     const { container } = render(
-      <Modal
-        state={{
-          modal: ModalState.tipEdition
-        }}
-        displayTipAdditionModal={mockFunction}
-        displayTipEditionModal={mockFunction}
-        displayTipsModal={mockFunction}
-        editTip={mockFunction}
-        addTip={mockFunction}
-        removeTip={mockFunction}
-        hideTipsModal={hideTipsModal}
-      />
+      withTheme(
+        <Modal
+          state={{
+            modal: ModalState.tipEdition
+          }}
+          displayTipAdditionModal={mockFunction}
+          displayTipEditionModal={mockFunction}
+          displayTipsModal={mockFunction}
+          editTip={mockFunction}
+          addTip={mockFunction}
+          removeTip={mockFunction}
+          hideTipsModal={hideTipsModal}
+        />
+      )
     );
 
     const buttons = container.getElementsByTagName("button");

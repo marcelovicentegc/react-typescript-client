@@ -1,17 +1,19 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { LandingPage } from "..";
-import { render } from "../../../utils/render";
-import { waitForElement } from "@testing-library/react";
+import { waitForElement, render } from "@testing-library/react";
 import { tips } from "../../../utils/mocks";
 import {
   LandingPageContext,
   ModalState
 } from "../../../contexts/LandingPageContext";
+import { withTheme, withContextProvider } from "../../../utils/render";
 
 describe("<LandingPage /> test case", () => {
   test("test ids and default content are in the document", () => {
-    const { container, getByTestId, getAllByTestId } = render(<LandingPage />);
+    const { container, getByTestId, getAllByTestId } = render(
+      withTheme(withContextProvider(<LandingPage />))
+    );
 
     expect(getByTestId("greetingsBox")).toBeInTheDocument();
     expect(getAllByTestId("span")).toHaveLength(2);
@@ -37,7 +39,7 @@ describe("<LandingPage /> test case", () => {
         <LandingPage />
       </LandingPageContext.Provider>
     );
-    const { getByText } = render(tree);
+    const { getByText } = render(withTheme(withContextProvider(tree)));
 
     expect(getByText("loading...")).toBeInTheDocument();
   });
@@ -57,7 +59,7 @@ describe("<LandingPage /> test case", () => {
         <LandingPage />
       </LandingPageContext.Provider>
     );
-    const { getByTestId } = render(tree);
+    const { getByTestId } = render(withTheme(withContextProvider(tree)));
 
     const modal = await waitForElement(() => getByTestId("innerCardWrapper"));
 

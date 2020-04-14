@@ -5,6 +5,12 @@
   "repository": "https://github.com/marcelovicentegc/react-typescript-client.git",
   "author": "Marcelo Cardoso <marcelovicentegc@gmail.com>",
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "start": "cross-env NODE_ENV=development webpack-dev-server --progress --host 0.0.0.0",
@@ -31,6 +37,8 @@
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.7",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@hot-loader/react-dom": "^16.11.0",
     "@types/jest": "^24.0.25",
     "@types/react": "^16.9.13",
@@ -40,6 +48,7 @@
     "cross-env": "^6.0.3",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.2.5",
     "internal-ip": "^5.0.0",
     "jest-styled-components": "^6.3.4",
     "jest-transform-stub": "^2.0.0",

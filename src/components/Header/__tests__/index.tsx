@@ -25,8 +25,9 @@ describe("<Header /> test case", () => {
     expect(getByText("Github")).toBeInTheDocument();
   });
 
-  test("buttons are clickable", () => {
+  test("buttons are clickable and are bound to store methods", () => {
     window.open = jest.fn();
+
     rootStore.uiStore.modal = null;
     rootStore.uiStore.displayTipsModal = jest.fn(() => {
       rootStore.uiStore.modal = ModalState.tips;
@@ -40,12 +41,17 @@ describe("<Header /> test case", () => {
     const tips = getByText("Tips");
 
     fireEvent.click(tips);
+
     expect(rootStore.uiStore.displayTipsModal).toHaveBeenCalled();
     expect(rootStore.uiStore.modal).toBe(ModalState.tips);
+
     fireEvent.click(tips);
+
     expect(rootStore.uiStore.hideTipsModal).toHaveBeenCalled();
     expect(rootStore.uiStore.modal).toBeNull();
+
     fireEvent.click(getByText("Github"));
+
     expect(window.open).toHaveBeenCalled();
   });
 });

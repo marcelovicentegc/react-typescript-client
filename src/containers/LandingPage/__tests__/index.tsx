@@ -3,7 +3,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { LandingPage } from "..";
 import { waitForElement, render } from "@testing-library/react";
 import { ModalState } from "../../../contexts/LandingPageContext";
-import { withTheme, withStoreProvider } from "../../../utils/render";
+import { withTheme } from "../../../utils/render";
 import { rootStore } from "../../../stores/RootStore";
 
 describe("<LandingPage /> test case", () => {

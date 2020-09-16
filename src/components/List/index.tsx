@@ -24,13 +24,14 @@ export const List: React.FC<Props> = ({
   getCurrentTipLabel
 }) => {
   return (
-    <UnorderedList>
+    <UnorderedList data-testid="unorderedList">
       {items.map(item => {
         return (
           <ListItem
             {...item}
             key={generateKey(20)}
             withExtraFunctionalities={!!displayItemEditionModal || !!removeItem}
+            data-testid="listItem"
           >
             {item.label}
             <Container>

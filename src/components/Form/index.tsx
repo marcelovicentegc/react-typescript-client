@@ -8,8 +8,8 @@ interface Props extends Omit<React.HTMLProps<HTMLFormElement>, "ref" | "as"> {
 
 export const Form: React.SFC<Props> = ({ inputs, ...props }) => {
   return (
-    <FormWrapper>
-      <StyledForm {...props}>
+    <FormWrapper data-testid="formWrapper">
+      <StyledForm {...props} data-testid="styledForm">
         {inputs.map((input, i) => {
           return <Input {...input} key={i} />;
         })}

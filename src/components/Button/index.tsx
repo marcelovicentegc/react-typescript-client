@@ -15,9 +15,13 @@ interface Props
 
 export const Button: React.FC<Props> = ({ label, type, ...props }) => {
   return (
-    <ButtonWrapper>
-      <StyledButton {...props} buttonType={type ? type : ButtonType.primary}>
-        <Label>{label}</Label>
+    <ButtonWrapper data-testid="buttonWrapper">
+      <StyledButton
+        {...props}
+        buttonType={type ? type : ButtonType.primary}
+        data-testid="styledButton"
+      >
+        <Label data-testid="label">{label}</Label>
       </StyledButton>
     </ButtonWrapper>
   );

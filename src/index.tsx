@@ -5,7 +5,7 @@ import { theme, Theme } from "./utils/theme";
 import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
 import { register } from "./serviceWorker";
-import { LandingPage } from "./containers/LandingPage";
+import { LandingPage, LandingPageClass } from "./containers/LandingPage";
 import { Provider } from "mobx-react";
 import { rootStore } from "./stores/RootStore";
 
@@ -34,7 +34,7 @@ const Root: React.FC = () => {
         <GlobalStyle theme={theme} />
         <Header />
         <Layout>
-          <LandingPage />
+          <LandingPageClass />
         </Layout>
       </Provider>
     </ThemeProvider>

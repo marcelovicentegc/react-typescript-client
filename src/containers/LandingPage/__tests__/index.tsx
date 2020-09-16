@@ -1,16 +1,15 @@
 import React from "react";
 import "@testing-library/jest-dom/extend-expect";
-import { LandingPage } from "..";
+import { LandingPage, LandingPageClass } from "..";
 import { waitForElement, render } from "@testing-library/react";
 import { ModalState } from "../../../contexts/LandingPageContext";
-import { withTheme } from "../../../utils/render";
+import { withStoreProvider, withTheme } from "../../../utils/render";
 import { rootStore } from "../../../stores/RootStore";
-import Modal from "../Modal";
 
 describe("<LandingPage /> test case", () => {
   test("test ids and default content are in the document", () => {
     const { container, getByTestId, getAllByTestId } = render(
-      withTheme(<LandingPage />)
+      withTheme(withStoreProvider(<LandingPageClass />, { store: rootStore }))
     );
 
     expect(getByTestId("greetingsBox")).toBeInTheDocument();
@@ -36,7 +35,9 @@ describe("<LandingPage /> test case", () => {
       expect(modal).toBeVisible();
     };
 
-    const { getByTestId, queryByTestId } = render(withTheme(<LandingPage />));
+    const { getByTestId, queryByTestId } = render(
+      withTheme(withStoreProvider(<LandingPageClass />, { store: rootStore }))
+    );
 
     await displayModalAndTest(ModalState.tips);
     hideModalAndTest();

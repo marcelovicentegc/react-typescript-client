@@ -5,6 +5,7 @@ import { waitForElement, render } from "@testing-library/react";
 import { ModalState } from "../../../contexts/LandingPageContext";
 import { withTheme } from "../../../utils/render";
 import { rootStore } from "../../../stores/RootStore";
+import Modal from "../Modal";
 
 describe("<LandingPage /> test case", () => {
   test("test ids and default content are in the document", () => {
@@ -22,12 +23,25 @@ describe("<LandingPage /> test case", () => {
   });
 
   test("renders tips card", async () => {
-    rootStore.uiStore.modal = ModalState.tips;
+    let modal: HTMLElement;
+    const hideModalAndTest = () => {
+      rootStore.uiStore.modal = null;
+      expect(queryByTestId("innerCardWrapper")).toBeNull();
+    };
+    const displayModalAndTest = async (state: ModalState) => {
+      rootStore.uiStore.modal = state;
 
-    const { getByTestId } = render(withTheme(<LandingPage />));
+      modal = await waitForElement(() => getByTestId("innerCardWrapper"));
 
-    const modal = await waitForElement(() => getByTestId("innerCardWrapper"));
+      expect(modal).toBeVisible();
+    };
 
-    expect(modal).toBeVisible();
+    const { getByTestId, queryByTestId } = render(withTheme(<LandingPage />));
+
+    await displayModalAndTest(ModalState.tips);
+    hideModalAndTest();
+    await displayModalAndTest(ModalState.tipAddition);
+    hideModalAndTest();
+    await displayModalAndTest(ModalState.tipEdition);
   });
 });

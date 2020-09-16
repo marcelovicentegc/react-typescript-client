@@ -1,34 +1,27 @@
 import React from "react";
 import { Image, Span, GreetingsBox } from "./style";
 import rocketLaunch from "../../icons/rocketLaunch.png";
-import { useLandingPageContext } from "../../contexts/LandingPageContext";
+import { useStores } from "../../stores/RootStore";
+import { observer } from "mobx-react";
 const Modal = React.lazy(() => import("./Modal"));
 
-export const LandingPage: React.FC = () => {
-  const {
-    state,
-    hideTipsModal,
-    addTip,
-    displayTipAdditionModal,
-    displayTipEditionModal,
-    displayTipsModal,
-    removeTip,
-    editTip
-  } = useLandingPageContext();
+export const LandingPage: React.FC = observer(() => {
+  const { uiStore } = useStores();
 
   return (
     <>
       <React.Suspense fallback={"loading..."}>
-        {!!state.modal && (
+        {uiStore.modal && (
           <Modal
-            state={state}
-            hideTipsModal={hideTipsModal}
-            addTip={addTip}
-            displayTipAdditionModal={displayTipAdditionModal}
-            displayTipEditionModal={displayTipEditionModal}
-            displayTipsModal={displayTipsModal}
-            removeTip={removeTip}
-            editTip={editTip}
+            modal={uiStore.modal}
+            tips={uiStore.tips}
+            hideTipsModal={uiStore.hideTipsModal}
+            addTip={uiStore.addTip}
+            displayTipAdditionModal={uiStore.displayTipAdditionModal}
+            displayTipEditionModal={uiStore.displayTipEditionModal}
+            displayTipsModal={uiStore.displayTipsModal}
+            removeTip={uiStore.removeTip}
+            editTip={uiStore.editTip}
           />
         )}
       </React.Suspense>
@@ -42,4 +35,4 @@ export const LandingPage: React.FC = () => {
       <Image src={rocketLaunch} alt={"Rocket being launched"} />
     </>
   );
-};
+});

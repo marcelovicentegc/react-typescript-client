@@ -4,9 +4,10 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme, Theme } from "./utils/theme";
 import { Header } from "./components/Header";
 import { Layout } from "./components/Layout";
-import { LandingPageProvider } from "./contexts/LandingPageContext";
 import { register } from "./serviceWorker";
 import { LandingPage } from "./containers/LandingPage";
+import { Provider } from "mobx-react";
+import { rootStore } from "./stores/RootStore";
 
 const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
     html {
@@ -15,7 +16,7 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
       overflow-x: hidden;
       
       body {
-            ${props => props.theme.fontFamily}
+            ${(props) => props.theme.fontFamily}
             margin: 0;
             height: 100%;
 
@@ -29,13 +30,13 @@ const GlobalStyle = createGlobalStyle<{ theme: Theme }>`
 const Root: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <LandingPageProvider>
+      <Provider {...rootStore}>
         <GlobalStyle theme={theme} />
         <Header />
         <Layout>
           <LandingPage />
         </Layout>
-      </LandingPageProvider>
+      </Provider>
     </ThemeProvider>
   );
 };

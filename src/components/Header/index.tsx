@@ -4,13 +4,14 @@ import {
   StyledHeader,
   LeftSide,
   RightSide,
-  AppTitle
+  AppTitle,
 } from "./style";
 import { Button, ButtonType } from "../Button";
-import { useLandingPageContext } from "../../contexts/LandingPageContext";
+import { useStores } from "../../stores/RootStore";
+import { observer } from "mobx-react";
 
-export const Header: React.FC = () => {
-  const { state, displayTipsModal, hideTipsModal } = useLandingPageContext();
+export const Header: React.FC = observer(() => {
+  const { uiStore } = useStores();
 
   return (
     <HeaderWrapper data-testid="headerWrapper">
@@ -22,7 +23,9 @@ export const Header: React.FC = () => {
           <Button
             label={"Tips"}
             onClick={() =>
-              !!state.modal ? hideTipsModal() : displayTipsModal()
+              uiStore.modal
+                ? uiStore.hideTipsModal()
+                : uiStore.displayTipsModal()
             }
           />
           <Button label={"Documentation"} type={ButtonType.tertiary} />
@@ -40,4 +43,4 @@ export const Header: React.FC = () => {
       </StyledHeader>
     </HeaderWrapper>
   );
-};
+});

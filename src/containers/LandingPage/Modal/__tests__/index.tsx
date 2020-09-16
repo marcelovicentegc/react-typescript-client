@@ -12,9 +12,8 @@ describe("<Modal /> test case", () => {
     const { getByTestId } = render(
       withTheme(
         <Modal
-          state={{
-            modal: ModalState.tips
-          }}
+          modal={ModalState.tips}
+          tips={tips}
           displayTipAdditionModal={mockFunction}
           displayTipEditionModal={mockFunction}
           displayTipsModal={mockFunction}
@@ -34,10 +33,8 @@ describe("<Modal /> test case", () => {
     const { container } = render(
       withTheme(
         <Modal
-          state={{
-            modal: ModalState.tips,
-            tips
-          }}
+          modal={ModalState.tips}
+          tips={tips}
           displayTipAdditionModal={mockFunction}
           displayTipEditionModal={mockFunction}
           displayTipsModal={mockFunction}
@@ -58,10 +55,8 @@ describe("<Modal /> test case", () => {
     const { container, queryByText } = render(
       withTheme(
         <Modal
-          state={{
-            modal: ModalState.tips,
-            tips
-          }}
+          modal={ModalState.tips}
+          tips={tips}
           displayTipAdditionModal={mockFunction}
           displayTipEditionModal={mockFunction}
           displayTipsModal={mockFunction}
@@ -85,9 +80,8 @@ describe("<Modal /> test case", () => {
     const { container, queryByText, getByDisplayValue } = render(
       withTheme(
         <Modal
-          state={{
-            modal: ModalState.tipAddition
-          }}
+          modal={ModalState.tipAddition}
+          tips={tips}
           displayTipAdditionModal={mockFunction}
           displayTipEditionModal={mockFunction}
           displayTipsModal={mockFunction}
@@ -106,7 +100,7 @@ describe("<Modal /> test case", () => {
     expect(queryByText(/add a tip/i)).not.toBeNull();
     expect(inputs.length).toBe(1);
     fireEvent.change(inputs[0], {
-      target: { value: inputValue }
+      target: { value: inputValue },
     });
     expect(getByDisplayValue(inputValue)).toBeInTheDocument();
   });
@@ -116,9 +110,8 @@ describe("<Modal /> test case", () => {
     const { container, queryByText, getByDisplayValue } = render(
       withTheme(
         <Modal
-          state={{
-            modal: ModalState.tipEdition
-          }}
+          modal={ModalState.tipEdition}
+          tips={tips}
           displayTipAdditionModal={mockFunction}
           displayTipEditionModal={mockFunction}
           displayTipsModal={mockFunction}
@@ -137,7 +130,7 @@ describe("<Modal /> test case", () => {
     expect(queryByText(/edit a tip/i)).not.toBeNull();
     expect(inputs.length).toBe(1);
     fireEvent.change(inputs[0], {
-      target: { value: inputValue }
+      target: { value: inputValue },
     });
     expect(getByDisplayValue(inputValue)).toBeInTheDocument();
   });
@@ -148,9 +141,8 @@ describe("<Modal /> test case", () => {
     const { getByTestId } = render(
       withTheme(
         <Modal
-          state={{
-            modal: ModalState.tipEdition
-          }}
+          modal={ModalState.tipEdition}
+          tips={tips}
           displayTipAdditionModal={mockFunction}
           displayTipEditionModal={mockFunction}
           displayTipsModal={mockFunction}
@@ -172,9 +164,8 @@ describe("<Modal /> test case", () => {
     const { container } = render(
       withTheme(
         <Modal
-          state={{
-            modal: ModalState.tipEdition
-          }}
+          modal={ModalState.tipEdition}
+          tips={tips}
           displayTipAdditionModal={mockFunction}
           displayTipEditionModal={mockFunction}
           displayTipsModal={mockFunction}

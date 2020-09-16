@@ -17,7 +17,7 @@ export const ButtonGroup: React.SFC<Props> = ({
   setTipLabel,
   tipLabel,
   tipFunction,
-  tipKey
+  tipKey,
 }) => {
   return (
     <StyledButtonGroup data-testid="styledButtonGroup">
@@ -34,9 +34,10 @@ export const ButtonGroup: React.SFC<Props> = ({
         onClick={() => {
           tipFunction({
             label: tipLabel,
-            key: tipKey ? tipKey : generateKey(10)
+            key: tipKey ? tipKey : generateKey(10),
           });
           setTipLabel("");
+          displayTipsModal();
         }}
       />
     </StyledButtonGroup>

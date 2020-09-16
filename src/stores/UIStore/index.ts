@@ -19,7 +19,7 @@ export class UIStore {
     this.rootStore = rootStore;
   }
 
-  @observable public modalState: ModalState = ModalState.tips;
+  @observable public modal: ModalState | null = null;
   @observable public tips: Tip[] = [
     { label: "Plan your application", key: "1" },
     { label: "Don't repeat yourself", key: "2" },
@@ -28,11 +28,6 @@ export class UIStore {
     { label: "Document what you're doing", key: "5" },
     { label: "Test what you're writing", key: "6" },
   ];
-
-  @action
-  public setModalState = (state: ModalState) => {
-    this.modalState = state;
-  };
 
   @action
   public addTip = (tip: Tip) => {
@@ -51,5 +46,22 @@ export class UIStore {
     const tipIndex = this.tips.findIndex((tip) => tip.key === tipToRemove.key);
 
     this.tips.splice(tipIndex, 1);
+  };
+
+  @action
+  public hideTipsModal = () => {
+    this.modal = null;
+  };
+
+  @action public displayTipAdditionModal = () => {
+    this.modal = ModalState.tipAddition;
+  };
+
+  @action public displayTipEditionModal = () => {
+    this.modal = ModalState.tipEdition;
+  };
+
+  @action public displayTipsModal = () => {
+    this.modal = ModalState.tips;
   };
 }

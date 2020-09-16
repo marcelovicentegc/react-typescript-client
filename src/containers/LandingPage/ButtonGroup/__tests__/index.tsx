@@ -43,7 +43,7 @@ describe("<ButtonGroup /> test case", () => {
     fireEvent.click(buttons[0]);
     expect(mockFunction).toHaveBeenCalledTimes(2);
     fireEvent.click(buttons[1]);
-    expect(mockFunction).toHaveBeenCalledTimes(4);
+    expect(mockFunction).toHaveBeenCalledTimes(5);
   });
 
   test("renders tipKey", () => {

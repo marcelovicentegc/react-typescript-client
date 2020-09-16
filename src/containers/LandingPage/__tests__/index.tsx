@@ -3,17 +3,13 @@ import "@testing-library/jest-dom/extend-expect";
 import { LandingPage } from "..";
 import { waitForElement, render } from "@testing-library/react";
 import { ModalState } from "../../../contexts/LandingPageContext";
-import {
-  withTheme,
-  withContextProvider,
-  withStoreProvider,
-} from "../../../utils/render";
+import { withTheme, withStoreProvider } from "../../../utils/render";
 import { rootStore } from "../../../stores/RootStore";
 
 describe("<LandingPage /> test case", () => {
   test("test ids and default content are in the document", () => {
     const { container, getByTestId, getAllByTestId } = render(
-      withTheme(withStoreProvider(<LandingPage />, { store: rootStore }))
+      withTheme(<LandingPage />)
     );
 
     expect(getByTestId("greetingsBox")).toBeInTheDocument();
@@ -27,9 +23,7 @@ describe("<LandingPage /> test case", () => {
 
   test("renders tips card", async () => {
     rootStore.uiStore.modal = ModalState.tips;
-    const { getByTestId } = render(
-      withTheme(withStoreProvider(<LandingPage />, { store: rootStore }))
-    );
+    const { getByTestId } = render(withTheme(<LandingPage />));
 
     const modal = await waitForElement(() => getByTestId("innerCardWrapper"));
 

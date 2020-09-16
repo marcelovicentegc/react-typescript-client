@@ -2,17 +2,13 @@ import React from "react";
 import "@testing-library/jest-dom/extend-expect";
 import { Header } from "..";
 import { fireEvent, render } from "@testing-library/react";
-import {
-  withTheme,
-  withContextProvider,
-  withStoreProvider,
-} from "../../../utils/render";
+import { withTheme } from "../../../utils/render";
 import { rootStore } from "../../../stores/RootStore";
 import { ModalState } from "../../../contexts/LandingPageContext";
 
 describe("<Header /> test case", () => {
   test("test ids are in the document", () => {
-    const { getByTestId } = render(withTheme(withContextProvider(<Header />)));
+    const { getByTestId } = render(withTheme(<Header />));
 
     expect(getByTestId("headerWrapper")).toBeInTheDocument();
     expect(getByTestId("styledHeader")).toBeInTheDocument();
@@ -22,7 +18,7 @@ describe("<Header /> test case", () => {
   });
 
   test("renders buttons", () => {
-    const { getByText } = render(withTheme(withContextProvider(<Header />)));
+    const { getByText } = render(withTheme(<Header />));
 
     expect(getByText("Tips")).toBeInTheDocument();
     expect(getByText("Documentation")).toBeInTheDocument();
@@ -39,9 +35,7 @@ describe("<Header /> test case", () => {
       rootStore.uiStore.modal = null;
     });
 
-    const { getByText } = render(
-      withTheme(withStoreProvider(<Header />, { store: rootStore }))
-    );
+    const { getByText } = render(withTheme(<Header />));
 
     const tips = getByText("Tips");
 

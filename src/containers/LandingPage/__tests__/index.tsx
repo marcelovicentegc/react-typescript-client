@@ -23,6 +23,7 @@ describe("<LandingPage /> test case", () => {
 
   test("renders tips card", async () => {
     rootStore.uiStore.modal = ModalState.tips;
+
     const { getByTestId } = render(withTheme(<LandingPage />));
 
     const modal = await waitForElement(() => getByTestId("innerCardWrapper"));
